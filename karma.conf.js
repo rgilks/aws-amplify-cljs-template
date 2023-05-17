@@ -2,9 +2,15 @@ module.exports = function (config) {
   var junitOutputDir = process.env.CIRCLE_TEST_REPORTS || 'target/junit'
 
   config.set({
-    browsers: ['ChromeHeadless'],
-    basePath: 'target',
-    files: ['karma-test.js'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
+    basePath: 'browser-test/js',
+    files: ['libs/bundle.js', 'karma-test.js'],
     frameworks: ['cljs-test'],
     plugins: [
       'karma-cljs-test',
@@ -12,7 +18,7 @@ module.exports = function (config) {
       'karma-junit-reporter'
     ],
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_ERROR,
     client: {
       args: ['shadow.test.karma.init']
     },
