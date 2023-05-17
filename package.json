@@ -20,6 +20,8 @@
     "@rjsf/mui": "^5.0.0-beta.14",
     "@rjsf/utils": "^5.0.0-beta.14",
     "@rjsf/validator-ajv6": "^5.0.0-beta.14",
+    "@sentry/react": "^7.34.0",
+    "@sentry/tracing": "^7.34.0",
     "ajv": "^8.11.2",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^2.1.1",

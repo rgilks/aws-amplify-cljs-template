@@ -9,7 +9,7 @@ frontend:
         - node -v
         - yarn ci
   artifacts:
-    baseDirectory: resources/public
+    baseDirectory: public
     files:
       - '**/*'
   cache:
