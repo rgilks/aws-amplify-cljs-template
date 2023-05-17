@@ -9,8 +9,7 @@
                 [day8.re-frame/test "0.1.5"]
                 [re-frisk "1.6.0"]
                 [com.pitch/uix.core "0.8.1"]
-                [com.pitch/uix.dom "0.8.1"]
-                [devcards/devcards "0.2.7"]]
+                [com.pitch/uix.dom "0.8.1"]]
  :dev-http     {3000 "public" 8290 "target/browser-test"}
  :builds
  {:app          {:target     :browser
@@ -27,21 +26,8 @@
                  :js-options {:js-provider :external :external-index "target/index.js"}
                  :runner-ns  shadow.test.browser
                  :test-dir   "target/browser-test"
-                 :compiler-options {:output-feature-set :es-next}} 
+                 :compiler-options {:output-feature-set :es-next}}
   :karma-test   {:target     :karma
                  :js-options {:js-provider :external :external-index "target/index.js"}
                  :output-to  "target/karma-test.js"
-                 :compiler-options {:output-feature-set :es-next}}}
- 
-  :devcards     {:target           :browser-test
-                 :ns-regexp        "-cards$"
-                 :test-dir         "resources/public/js/compiled/devcards_out"
-                 :runner-ns        improve-frontend.devcards
-                 :compiler-options {:devcards           true
-                                    :output-feature-set :es-next}
-                 :js-options       {:js-provider :external :external-index "target/index.js"
-                                    :resolve
-                                    {"devcards-marked"
-                                     {:target :npm :require "marked"}
-                                     "devcards-syntax-highlighter"
-                                     {:target :npm :require "highlight.js"}}}}}
+                 :compiler-options {:output-feature-set :es-next}}}}
