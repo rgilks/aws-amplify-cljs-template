@@ -36,6 +36,7 @@
     "workbox-precaching": "^6.5.4"
   },
   "scripts": {
+    "karma": "karma start",
     "watch": "shadow-cljs watch app browser-test karma-test devcards",
     "build": "shadow-cljs release app",
     "build-verbose": "shadow-cljs release --verbose app",
@@ -53,6 +54,7 @@
     "nuke": "rimraf public/js .shadow-cljs node_modules yarn.lock package-lock.json out report.html",
     "shadow-cljs-server": "shadow-cljs server",
     "webpack": "webpack --watch",
+    "lint": "clj-kondo --lint ./",
     "pretty": "prettier --write '**/*.*'",
     "format": "yarn pretty && yarn lint "
   },

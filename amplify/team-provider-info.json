@@ -1,0 +1,23 @@
+{
+  "devcljst": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cljstemplate-devcljst-133919-authRole",
+      "UnauthRoleArn": "arn:aws:iam::250357559699:role/amplify-cljstemplate-devcljst-133919-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::250357559699:role/amplify-cljstemplate-devcljst-133919-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cljstemplate-devcljst-133919-deployment",
+      "UnauthRoleName": "amplify-cljstemplate-devcljst-133919-unauthRole",
+      "StackName": "amplify-cljstemplate-devcljst-133919",
+      "StackId": "arn:aws:cloudformation:eu-west-1:250357559699:stack/amplify-cljstemplate-devcljst-133919/d8758cf0-f4af-11ed-91ca-0229f1b2169b",
+      "AmplifyAppId": "d3uli8zc9s50g6"
+    },
+    "categories": {
+      "auth": {
+        "cljstemplatecc274de4": {}
+      },
+      "api": {
+        "cljstemplate": {}
+      }
+    }
+  }
+}

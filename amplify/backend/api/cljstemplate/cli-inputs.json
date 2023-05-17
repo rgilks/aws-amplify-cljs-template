@@ -1,0 +1,24 @@
+{
+    "version": 1,
+    "serviceConfiguration": {
+        "apiName": "cljstemplate",
+        "serviceName": "AppSync",
+        "defaultAuthType": {
+            "mode": "AMAZON_COGNITO_USER_POOLS",
+            "cognitoUserPoolId": "authcljstemplatecc274de4"
+        },
+        "additionalAuthTypes": [
+            {
+                "mode": "API_KEY",
+                "expirationTime": 30,
+                "apiKeyExpirationDate": "2023-06-16T12:46:58.780Z",
+                "keyDescription": "cljstemplate-key"
+            }
+        ],
+        "conflictResolution": {
+            "defaultResolutionStrategy": {
+                "type": "AUTOMERGE"
+            }
+        }
+    }
+}

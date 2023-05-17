@@ -23,8 +23,14 @@ data/migrate/.temp/
 /target
 /out
 *.cljs
+*.clj
 .clj-kondo
 .shadow-cljs
+cljs-runtime
+.cpcache
+.lsp
+.github
+.calva
 
 #amplify
 amplify/#current-cloud-backend

@@ -7,5 +7,5 @@
    :dice-box nil
    :current-route nil
    :timeout-ids {}
-   :characters {}
+   :todos {}
    })

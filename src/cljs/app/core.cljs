@@ -52,7 +52,7 @@
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
   (init-routes!)
-  (re-frame/dispatch [::events/get :characters])
+  (re-frame/dispatch [::events/get :todos])
   (re-frame/dispatch-sync [::events/subscribe])
   (reagent/render [router-root {:router router}]
                   (.getElementById js/document "app")))

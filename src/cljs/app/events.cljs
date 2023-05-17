@@ -1,11 +1,11 @@
 (ns app.events
   (:require
-    [re-frame.core :refer [reg-cofx reg-event-db reg-fx reg-event-fx dispatch]]
+    [re-frame.core :refer [reg-event-db reg-fx reg-event-fx dispatch]]
     ["aws-amplify" :refer [DataStore Auth]]
     [reitit.frontend.controllers :as reitit-controllers]
     [reitit.frontend.easy :as reitit-easy]
     [app.db :refer [default-db]]
-    ["models" :refer [Character DieRoll]]
+    ["models" :refer [Todo]]
     [promesa.core :as p]
     [app.sound :refer [sound]]
     [goog.object :as gobj]
@@ -137,8 +137,8 @@
     (assoc db entity-key data)))
 
 (def entity-map
-  {:characters Character
-   :character  Character
+  {:todos Todo
+   :todo  Todo
    })
 
 (reg-fx
