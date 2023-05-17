@@ -36,7 +36,8 @@
     "workbox-precaching": "^6.5.4"
   },
   "scripts": {
-    "ci": "npx shadow-cljs release app && npx shadow-cljs compile browser-test karma-test && webpack && npx karma start --single-run --reporters junit,dots",
+    "ci": "npx shadow-cljs release app && npx shadow-cljs compile browser-test karma-test && webpack",
+    "ci-with-test": "npx shadow-cljs release app && npx shadow-cljs compile browser-test karma-test && webpack && npx karma start --single-run --reporters junit,dots",
     "karma": "karma start",
     "watch": "shadow-cljs watch app browser-test karma-test",
     "build": "shadow-cljs release app",
@@ -97,14 +98,14 @@
     "lodash": "^4.17.21",
     "prettier": "^2.8.8",
     "react-highlight.js": "^1.0.7",
+    "react-refresh": "^0.14.0",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^18.2.0",
-    "react-refresh": "^0.14.0",
     "rimraf": "^3.0.2",
     "serve": "^14.1.2",
     "shadow-cljs": "2.23.3",
+    "start-server-and-test": "^2.0.0",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "start-server-and-test": "^2.0.0"
+    "webpack-cli": "^5.0.1"
   }
 }
