@@ -7,7 +7,7 @@
                 [funcool/promesa "10.0.594"]
                 [com.pitch/uix.core "0.9.1"]
                 [com.pitch/uix.dom "0.9.1"]]
- :dev-http     {3000 "public" 8290 "target/browser-test"}
+ :dev-http     {3000 "public"}
  :builds
  {:app          {:target     :browser
                  :output-dir "public/js"
@@ -18,13 +18,4 @@
                  :compiler-options {:output-feature-set :es-next}
                  :dev        {:compiler-options {:warnings {:redef false}
                                                  :output-feature-set :es-next}
-                              :closure-defines  {"re_frame.trace.trace_enabled_QMARK_" true}}}
-  :browser-test {:target     :browser-test
-                 :js-options {:js-provider :external :external-index "target/index.js"}
-                 :runner-ns  shadow.test.browser
-                 :test-dir   "target/browser-test"
-                 :compiler-options {:output-feature-set :es-next}}
-  :karma-test   {:target     :karma
-                 :js-options {:js-provider :external :external-index "target/index.js"}
-                 :output-to  "target/karma-test.js"
-                 :compiler-options {:output-feature-set :es-next}}}}
+                              :closure-defines  {"re_frame.trace.trace_enabled_QMARK_" true}}}}}

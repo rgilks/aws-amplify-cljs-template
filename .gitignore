@@ -9,9 +9,6 @@ report.html
 /public/js
 /out
 /target/
-/browser-test/js
-# This should probably be ignored, still sorting out some issues with the build
-# /browser-test/index.js
 
 # misc
 .DS_Store
