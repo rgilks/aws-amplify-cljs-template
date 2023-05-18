@@ -12,6 +12,7 @@ frontend:
     build:
       commands:
         - node -v
+        - ls src/amplify/
         - yarn ci
   artifacts:
     baseDirectory: public
