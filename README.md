@@ -101,3 +101,8 @@ yarn webpack
 ```
 yarn karma
 ```
+
+## DataStore
+
+![DataStore](/docs/datastore.webp?raw=true)
+
