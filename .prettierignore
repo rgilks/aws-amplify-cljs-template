@@ -6,6 +6,7 @@
 # testing
 /coverage
 /.nyc_output
+/browser-test/js
 
 # production
 /build
@@ -83,6 +84,7 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 
+*.webp
 *.jpg
 *.jpeg
 *.psd

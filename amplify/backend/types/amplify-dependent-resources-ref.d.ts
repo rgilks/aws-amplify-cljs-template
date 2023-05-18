@@ -3,7 +3,6 @@ export type AmplifyDependentResourcesAttributes = {
     cljstemplate: {
       GraphQLAPIEndpointOutput: 'string'
       GraphQLAPIIdOutput: 'string'
-      GraphQLAPIKeyOutput: 'string'
     }
   }
   auth: {

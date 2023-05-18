@@ -14,12 +14,7 @@
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
-              "apiKeyConfig": {
-                "apiKeyExpirationDate": "2023-06-16T12:46:58.780Z",
-                "apiKeyExpirationDays": 30,
-                "description": "cljstemplate-key"
-              },
-              "authenticationType": "API_KEY"
+              "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {

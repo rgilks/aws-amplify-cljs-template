@@ -16,8 +16,8 @@ Otherwise you can start here:
 
 https://docs.amplify.aws/cli/start/workflows/
 
-
 ### Init
+
 ```
 ❯ amplify init
 Note: It is recommended to run this command from the root of your app directory
@@ -91,11 +91,14 @@ Learn more about "@auth" authorization rules here: https://docs.amplify.aws/cli/
 Run the following in separate terminals
 
 ```
-yarn watch
+yarn webpack
 ```
 
+The webpack terminal will display some errors until the builds run by the following
+command are complete.
+
 ```
-yarn webpack
+yarn watch
 ```
 
 ```
@@ -105,4 +108,3 @@ yarn karma
 ## DataStore
 
 ![DataStore](/docs/datastore.webp?raw=true)
-
