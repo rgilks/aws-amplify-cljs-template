@@ -9,6 +9,8 @@ report.html
 /public/js
 /out
 /target/
+/browser-test/js
+/browser-test/index.js
 
 # misc
 .DS_Store
