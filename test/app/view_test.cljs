@@ -2,17 +2,12 @@
   (:require [cljs.test :refer [deftest is testing async]]
             [app.view :as comp]
             [uix.core :refer [$]]
-            ["@testing-library/react" :as rtl]
-            [promesa.core :as p]))
+            ["@testing-library/react" :as rtl]))
 
 (deftest todos-test
-  (async
-   done
-   (rtl/render ($ comp/todos {}))
-   (is (nil? (.queryByTestId rtl/screen "todos")))
-   (p/do
-     (rtl/waitFor #(.getByTestId rtl/screen "todos"))
-     (is (= "[{:id \"1\", :name \"name\"}]"
-            (.-textContent (.getByTestId rtl/screen "todos"))))
-     (rtl/cleanup)
-     (done))))
+  (testing "display todos"
+    (let [store {:query-all #(%2 [{:id "10" :name "name"}])}]
+      (rtl/render ($ comp/todos {:store store}))
+      (is (= "[{:id \"10\", :name \"name\"}]"
+             (.-textContent (.getByTestId rtl/screen "todos"))))))
+  (rtl/cleanup))
