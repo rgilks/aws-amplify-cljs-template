@@ -20,19 +20,22 @@
       :style {:color "white"}} "WIDGET"))
 
 (defui todos []
-  (let [[todos set-todos] (use-state [])]
+  (let [[todos set-todos] (use-state nil)]
     (use-effect
-     #(p/let [results (.query amplify/DataStore models/Todo)
-              data (obj->clj results)]
-        (println "results" data)
-        (set-todos data)) [])
+     #(p/let [results [{:id "1" :name "name"}] ;;(.query amplify/DataStore models/Todo)
+            ;;   data (obj->clj results)
+              ]
+      ;;   (println "results" data)
+        (set-todos results)) [])
     ($ :div
        ($ :div
           {:style {:color "white"}}
           "TODO LIST")
-       ($ :div
-          {:style {:color "white"}}
-          (str todos)))))
+       (when todos
+         ($ :div
+            {:data-testid "todos"
+             :style {:color "white"}}
+            (str todos))))))
 
 (defui main []
   ($ :<>
