@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const appConfig = {
   mode: 'development',
@@ -28,7 +29,11 @@ const appConfig = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    })]
 }
 
 const testConfig = {
