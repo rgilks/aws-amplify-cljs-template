@@ -9,8 +9,10 @@ report.html
 /public/js
 /out
 /target/
-/browser-test/js
-/browser-test/index.js
+.jest
+.cpcache
+
+/src/amplify/ui-components
 
 # misc
 .DS_Store
