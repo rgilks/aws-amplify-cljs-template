@@ -14,7 +14,7 @@
   },
   "scripts": {
     "update": "ncu -u && rm -rf node_modules && rm yarn.lock && yarn",
-    "ci": "shadow-cljs release app && webpack && npx karma start --single-run --reporters junit,dots",
+    "ci": "shadow-cljs release app && shadow-cljs compile karma-test && karma start --single-run --reporters junit,dots",
     "karma": "karma start",
     "watch": "shadow-cljs watch app browser-test karma-test",
     "build": "shadow-cljs release app",
