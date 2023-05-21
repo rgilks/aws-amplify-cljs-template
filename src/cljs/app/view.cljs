@@ -14,6 +14,11 @@
   (js->clj (-> obj js/JSON.stringify js/JSON.parse) :keywordize-keys true))
 
 
+(defui widget []
+  ($ :div
+     {:data-testid "widget"
+      :style {:color "white"}} "WIDGET"))
+
 (defui todos []
   (let [[todos set-todos] (use-state [])]
     (use-effect
