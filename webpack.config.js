@@ -1,5 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlBeautifierPlugin = require('html-beautifier-webpack-plugin')
 
 const appConfig = {
   mode: 'development',
@@ -33,7 +35,16 @@ const appConfig = {
   plugins: [
     new webpack.ProvidePlugin({
       process: 'process/browser'
-    })]
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html.tmpl',
+      filename: 'index.html',
+      templateParameters: {
+        basePath: process.env.BASE_PATH ?? 'http://localhost:3000/'
+      }
+    }),
+    new HtmlBeautifierPlugin()
+  ]
 }
 
 const testConfig = {
