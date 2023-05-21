@@ -12,7 +12,7 @@ frontend:
     build:
       commands:
         - node -v
-        - printenv
+        # - printenv
         - yarn ci
   artifacts:
     baseDirectory: public

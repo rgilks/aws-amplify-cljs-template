@@ -1,115 +1,170 @@
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <base href="http://localhost:3000/">
-    <link rel="icon" href="favicon.ico" />
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="APP DESCRIPTION" />
-    <link rel="apple-touch-icon" href="logo192.png" />
-    <link rel="manifest" href="manifest.json" />
-    <title>APP NAME</title>
-    <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter:slnt,wght@-10..0,100..900&display=swap" />
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body,
-      canvas {
-        position: fixed;
-        overflow: hidden;
-        overscroll-behavior-y: none;
-        background: black;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        touch-action: none;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-          'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-          'Helvetica Neue', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      * {
-        scrollbar-width: thin;
-        scrollbar-color: grey black;
-      }
-      /* Works on Chrome, Edge, and Safari */
-      *::-webkit-scrollbar {
-        width: 8px;
-      }
-      *::-webkit-scrollbar-track {
-        background: black;
-      }
-      *::-webkit-scrollbar-thumb {
-        background-color: grey;
-        border-radius: 20px;
-        border: 3px solid black;
-      }
-      code {
-        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-          monospace;
-      }
-      :root {
-        --amplify-primary-color: black;
-        --amplify-primary-tint: #000;
-        --amplify-primary-shade: #000;
-        --amplify-colors-background-primary: black;
-        --amplify-colors-background-secondary: #88FF66;
-        --amplify-colors-brand-primary-10: #88FF66;
-        --amplify-colors-brand-primary-80: #88FF66;
-        --amplify-colors-brand-primary-90: #88FF66;
-        --amplify-colors-brand-primary-100: #88FF66;
-        --amplify-colors-font-interactive: #88FF66;
-        --amplify-components-fieldcontrol-color: white;
-        --amplify-components-field-label-color: white;
-        --amplify-components-tabs-item-color: black;
-        --amplify-components-tabs-item-active-color: white;
-        --amplify-components-tabs-item-focus-color: white;
-        --amplify-components-tabs-item-hover-color: white;
-        --amplify-components-heading-color: white;
-        --amplify-components-button-color: white;
-        --amplify-components-button-hover-color: black;
-        --amplify-components-button-focus-color: black;
-        --amplify-components-button-primary-color: black;
-        --amplify-components-button-primary-hover-color: black;
-        --amplify-components-button-primary-hover-background-color: white;
-        --amplify-components-button-link-hover-background-color: black;
-        --amplify-components-authenticator-form-padding: 18px;
-      }
-      [data-amplify-authenticator] {
-        display: grid;
-        padding-top: 70px;
-        margin-top: 20px;
-        background-image: url("cepheus-online.png");
-        background-repeat: no-repeat;
-        background-position: top center;
-      }
-      @font-face {
-        font-family: 'Orbitron';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/orbitron/v17/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nyGy6BoWg1fDAlp7lk.woff) format('woff');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-          U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-          U+FEFF, U+FFFD;
-      }
-      h1,
-      a {
-        color: var(--amplify-primary-color);
-      }
-    </style>
-    <script defer src="js/libs/bundle.js"></script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script defer src="js/main.js" type="text/javascript"></script>
-  </body>
-</html>
+<head>
+  <script defer src="js/libs/bundle.js"></script>
+</head>Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Module not found: Error: Can't resolve '/Users/robertgilks/Source/aws-amplify-  cljs-template/public/index.html.tmpl' in '/Users/robertgilks/Source/aws-amplif  y-cljs-template'
+  ModuleNotFoundError: Module not found: Error: Can't resolve '/Users/robertgilk  s/Source/aws-amplify-cljs-template/public/index.html.tmpl' in '/Users/robertgi  lks/Source/aws-amplify-cljs-template'
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/Compilation.js:2022:28
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:817:13
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:275:22
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:448:22
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:118:11
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:689:25
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:893:8
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:1013:5
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/neo-as  ync/async.js:6883:13
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/webpac  k/lib/NormalModuleFactory.js:979:9
+      at finishWithoutResolve (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/enhanced-resolve/lib/Resolver.js:324:11)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:398:15
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/DescriptionFilePlugin.js:87:43
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/DescriptionFilePlugin.js:87:43
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/Resolver.js:447:5
+      at eval (eval at create (/Users/robertgilks/Source/aws-amplify-cljs-templa  te/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+      at /Users/robertgilks/Source/aws-amplify-cljs-template/node_modules/enhanc  ed-resolve/lib/DirectoryExistsPlugin.js:41:15
+      at processTicksAndRejections (node:internal/process/task_queues:82:21)
+  
+  - Compilation.js:2022 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compilation.js:2022:28
+  
+  - NormalModuleFactory.js:817 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:817:13
+  
+  
+  - NormalModuleFactory.js:275 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:275:22
+  
+  
+  - NormalModuleFactory.js:448 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:448:22
+  
+  - NormalModuleFactory.js:118 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:118:11
+  
+  - NormalModuleFactory.js:689 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:689:25
+  
+  - NormalModuleFactory.js:893 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:893:8
+  
+  - NormalModuleFactory.js:1013 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:1013:5
+  
+  - async.js:6883 
+    [aws-amplify-cljs-template]/[neo-async]/async.js:6883:13
+  
+  - NormalModuleFactory.js:979 
+    [aws-amplify-cljs-template]/[webpack]/lib/NormalModuleFactory.js:979:9
+  
+  - Resolver.js:324 finishWithoutResolve
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:324:11
+  
+  - Resolver.js:398 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:398:15
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - DescriptionFilePlugin.js:87 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/DescriptionFilePlugin.js:    87:43
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - DescriptionFilePlugin.js:87 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/DescriptionFilePlugin.js:    87:43
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - Resolver.js:447 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/Resolver.js:447:5
+  
+  
+  - DirectoryExistsPlugin.js:41 
+    [aws-amplify-cljs-template]/[enhanced-resolve]/lib/DirectoryExistsPlugin.js:    41:15
+  
+  - task_queues:82 processTicksAndRejections
+    node:internal/process/task_queues:82:21
+  
+  - child-compiler.js:169 
+    [aws-amplify-cljs-template]/[html-webpack-plugin]/lib/child-compiler.js:169:    18
+  
+  - Compiler.js:551 finalCallback
+    [aws-amplify-cljs-template]/[webpack]/lib/Compiler.js:551:5
+  
+  - Compiler.js:577 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compiler.js:577:11
+  
+  - Compiler.js:1199 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compiler.js:1199:17
+  
+  
+  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
+    [aws-amplify-cljs-template]/[tapable]/lib/Hook.js:18:14
+  
+  - Compiler.js:1195 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compiler.js:1195:33
+  
+  - Compilation.js:2795 finalCallback
+    [aws-amplify-cljs-template]/[webpack]/lib/Compilation.js:2795:11
+  
+  - Compilation.js:3100 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compilation.js:3100:11
+  
+  
+  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
+    [aws-amplify-cljs-template]/[tapable]/lib/Hook.js:18:14
+  
+  - Compilation.js:3093 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compilation.js:3093:38
+  
+  
+  - Compilation.js:522 
+    [aws-amplify-cljs-template]/[webpack]/lib/Compilation.js:522:10
+  
+  - SourceMapDevToolPlugin.js:573 
+    [aws-amplify-cljs-template]/[webpack]/lib/SourceMapDevToolPlugin.js:573:10
+  
+  - async.js:2830 
+    [aws-amplify-cljs-template]/[neo-async]/async.js:2830:7
+  
+  - async.js:2857 Object.each
+    [aws-amplify-cljs-template]/[neo-async]/async.js:2857:9
+  
+</pre>
