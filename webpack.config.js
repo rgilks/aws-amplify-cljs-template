@@ -33,9 +33,9 @@ const appConfig = {
 
 const testConfig = {
   mode: 'development',
-  entry: './browser-test/index.js',
+  entry: './out/index.js',
   output: {
-    path: path.resolve(__dirname, 'browser-test'),
+    path: path.resolve(__dirname, 'out'),
     filename: 'js/libs/bundle.js',
     clean: false
   },

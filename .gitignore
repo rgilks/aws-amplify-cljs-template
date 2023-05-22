@@ -12,8 +12,8 @@ report.html
 .jest
 .cpcache
 
-/browser-test/js
-/browser-test/index.js
+/out/js
+/out/index.js
 
 /src/amplify/ui-components
 

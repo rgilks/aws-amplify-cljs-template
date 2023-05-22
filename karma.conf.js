@@ -9,7 +9,7 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    basePath: 'browser-test/js',
+    basePath: 'out/js',
     files: ['libs/bundle.js', 'karma-test.js'],
     frameworks: ['cljs-test'],
     plugins: [
