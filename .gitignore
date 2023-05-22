@@ -7,7 +7,6 @@ report.html
 
 # generated js
 /public/js
-/out
 /target/
 .jest
 .cpcache
@@ -32,8 +31,6 @@ yarn-error.log*
 
 
 .nrepl-port
-
-/out
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
