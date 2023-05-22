@@ -13,7 +13,6 @@ report.html
 .cpcache
 
 /out/js
-/out/index.js
 
 /src/amplify/ui-components
 
