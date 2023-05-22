@@ -1,5 +1,5 @@
 (ns app.view-test
-  (:require [cljs.test :refer [deftest is testing async]]
+  (:require [cljs.test :refer [deftest is testing]]
             [app.view :as comp]
             [uix.core :refer [$]]
             ["@testing-library/react" :as rtl]))
