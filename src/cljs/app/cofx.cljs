@@ -1,12 +1,12 @@
 (ns app.cofx
-  (:require [re-frame.core :as rf]))
+  (:require [refx.alpha :as refx]))
 
-(rf/reg-cofx
+(refx/reg-cofx
   ::uuid
   (fn [cofx _]
     (assoc cofx :uuid (str (random-uuid)))))
 
-(rf/reg-cofx
+(refx/reg-cofx
   ::time
   (fn [cofx _]
     (assoc cofx :time (.getTime (js/Date.)))))
