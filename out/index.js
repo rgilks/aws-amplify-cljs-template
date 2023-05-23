@@ -3,6 +3,8 @@
 
 var ALL = {};
 ALL["react-dom/client"] = require("react-dom/client");
+ALL["use-sync-external-store/shim"] = require("use-sync-external-store/shim");
+ALL["aws-exports"] = require("aws-exports");
 ALL["@aws-amplify/ui-react"] = require("@aws-amplify/ui-react");
 ALL["aws-amplify"] = require("aws-amplify");
 ALL["@testing-library/react"] = require("@testing-library/react");

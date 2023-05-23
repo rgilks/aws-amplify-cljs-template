@@ -1,19 +1,23 @@
 (ns app.view
   (:require
-   [uix.core :refer [$ defui use-state use-effect]]
+   [uix.core :refer [$ defui]]
    ["models" :as models]
    [uix.dom]
-   [app.ds]
    ["@aws-amplify/ui-react" :as amplify-ui]
-   ["react-div-100vh" :default Div100vh]))
+   ["react-div-100vh" :default Div100vh]
+   [refx.alpha :as refx]))
 
-(defui todos [{:keys [store] :as _props}]
-  (let [[todos set-todos] (use-state nil)
-        {:keys [query-all]} store]
-    (use-effect #(query-all models/Todo set-todos) [query-all])
+(refx/reg-sub
+ ::todos
+ (fn [db] (:todos db)))
+
+(defui todos []
+  (let [todos (refx/use-sub [::todos])
+        _ (println "todos" todos)]
     ($ :div
        ($ :div
-          {:style {:color "white"}}
+          {:data-testid "todos-title"
+           :style {:color "white"}}
           "TODO LIST")
        (when todos
          ($ :div
@@ -29,4 +33,4 @@
               ($ :div
                  {:style {:color "white"}}
                  "YOU ARE LOGGED IN!")
-              ($ todos {:store app.ds/store}))))))
+              ($ todos))))))

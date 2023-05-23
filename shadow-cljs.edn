@@ -1,7 +1,6 @@
 {:nrepl        {:port 8775}
  :source-paths ["src/cljs" "test"]
  :dependencies [[metosin/reitit "0.7.0-alpha4"]
-                [binaryage/devtools "1.0.6"]
                 [metosin/malli "0.11.0"]
                 [com.velisco/strgen "0.2.4"]
                 [funcool/promesa "10.0.594"]
@@ -15,7 +14,6 @@
                  :asset-path "/js"
                  :js-options {:js-provider :external :external-index "target/index.js"}
                  :modules    {:main {:init-fn app.core/main}}
-                 :devtools   {:preloads [devtools.preload]}
                  :compiler-options {:output-feature-set :es-next}
                  :dev        {:compiler-options {:warnings {:redef false}
                                                  :output-feature-set :es-next}
