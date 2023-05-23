@@ -10,3 +10,6 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/amplify/graphql
+extensions:
+  amplify:
+    version: 3

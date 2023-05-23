@@ -2,6 +2,6 @@
 import {initSchema} from '@aws-amplify/datastore'
 import {schema} from './schema'
 
-const {Todo} = initSchema(schema)
+const {Player, Game} = initSchema(schema)
 
-export {Todo}
+export {Player, Game}

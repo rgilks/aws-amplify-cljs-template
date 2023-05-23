@@ -1,7 +1,6 @@
 (ns app.view
   (:require
    [uix.core :refer [$ defui]]
-   ["models" :as models]
    [uix.dom]
    ["@aws-amplify/ui-react" :as amplify-ui]
    ["react-div-100vh" :default Div100vh]
