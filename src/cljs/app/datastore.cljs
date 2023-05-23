@@ -19,14 +19,27 @@
     (.stop amplify/DataStore))
   (js/setTimeout #(.start amplify/DataStore) 1000))
 
-(refx/reg-event-db
- ::init-db
- (fn [_ [_ init]] init))
+(defn- handle-subs [model-key ^js msg]
+  (let [element (.-element msg)
+        id      (.-id element)
+        opType  (.-opType msg)]
+    (if (= opType "DELETE")
+      (refx/dispatch [::delete-model model-key id])
+      (refx/dispatch [::update-model model-key id (ut/obj->clj element)]))))
 
-(refx/reg-event-db
- ::update-models-db
- (fn [db [_ model-key data]]
-   (assoc db model-key data)))
+(refx/reg-fx
+ :configure
+ (fn [[game-id username]]
+   (println "Datastore configure - username:" username " game-id:" game-id)
+   (when username
+     (configure game-id username))))
+
+(refx/reg-fx
+ :subscribe
+ (fn [models]
+   (doseq [[key model] models]
+     (.subscribe
+      (.observe amplify/DataStore model) #(handle-subs key %)))))
 
 (refx/reg-fx
  :get-items
@@ -35,23 +48,16 @@
      (p/let [result (.query amplify/DataStore model)
              data (ut/obj->clj result)
              keyed-data (reduce #(assoc %1 (:id %2) %2) {} data)]
-       (refx/dispatch [::update-models-db key keyed-data])))))
+       (refx/dispatch [::update-models key keyed-data])))))
 
-(refx/reg-event-fx
- ::datastore-ready
- (fn
-   [{:keys [db]} [_]]
-   (let [models  [[:games models/Game]]]
-     {:get-items models
-      :subscribe models
-      :db (assoc db :datastore-ready true)})))
+(refx/reg-event-db
+ ::init
+ (fn [_ [_ init]] init))
 
-(refx/reg-fx
- :datastore-configure
- (fn [[game-id username]]
-   (println "Datastore configure - username:" username " game-id:" game-id)
-   (when username
-     (configure game-id username))))
+(refx/reg-event-db
+ ::update-models
+ (fn [db [_ model-key data]]
+   (assoc db model-key data)))
 
 (refx/reg-event-db
  ::delete-model
@@ -66,52 +72,20 @@
    (when (not (get-in db [:timeout-ids id]))
      (assoc-in db [model-key id] data))))
 
-(defn- handle-subs [model-key ^js msg]
-  (let [element (.-element msg)
-        id      (.-id element)
-        opType  (.-opType msg)]
-    (if (= opType "DELETE")
-      (refx/dispatch [::delete-model model-key id])
-      (refx/dispatch [::update-model model-key id (ut/obj->clj element)]))))
-
-(refx/reg-fx
- :subscribe
- (fn [models]
-   (doseq [[key model] models]
-     (.subscribe
-      (.observe amplify/DataStore model) #(handle-subs key %)))))
-
 (refx/reg-event-fx
- ::datastore-configure
+ ::configure
  (fn
    [{:keys [db]} [_ game-id]]
    (let [username (:username db)]
-     {:datastore-configure [game-id username]
+     {:configure [game-id username]
       :db (assoc db :datastore-ready false)})))
 
-(defn is-unsubscribed? [user]
-  (= "true" (get (js->clj (.-attributes user)) "custom:unsubscribed")))
-
 (refx/reg-event-fx
- ::user-update
- (fn [{:keys [db]} [_ user]]
-   (let [username (.-username user)
-         unsubscribed (is-unsubscribed? user)
-         fx {:db (assoc db
-                        :user user
-                        :username username
-                        :unsubscribed unsubscribed)}]
-     (println "Update user" username)
-     (merge fx {:dispatch [::datastore-configure "UNKNOWN"]}))))
+ ::ready
+ (fn
+   [{:keys [db]} [_]]
+   (let [models  [[:games models/Game]]]
+     {:get-items models
+      :subscribe models
+      :db (assoc db :datastore-ready true)})))
 
-(refx/reg-fx
- :get-user
- (fn []
-   (-> (p/let [user (.currentAuthenticatedUser amplify/Auth)]
-         (refx/dispatch [::user-update user]))
-       (p/catch #(println "Get user" %)))))
-
-(refx/reg-event-fx
- ::user-get
- (fn [_ [_]]
-   {:get-user []}))

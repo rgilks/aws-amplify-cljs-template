@@ -11,8 +11,7 @@
  (fn [db] (:games db)))
 
 (defui games []
-  (let [games (refx/use-sub [::games])
-        _ (println "games" games)]
+  (let [games (refx/use-sub [::games])]
     ($ :div
        ($ :div
           {:data-testid "games-title"

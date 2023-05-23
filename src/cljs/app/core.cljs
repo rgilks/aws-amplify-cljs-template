@@ -3,7 +3,8 @@
    ["aws-exports" :default aws-exports]
    ["aws-amplify" :as amplify]
    [app.view :as view]
-   [app.datastore :as ds]
+   [app.datastore :as datastore]
+   [app.user :as user]
    [uix.core :refer [$]]
    [uix.dom]
    [refx.alpha :as refx]))
@@ -23,18 +24,18 @@
   (refx/clear-subscription-cache!)
   (-> amplify/Amplify (.configure aws-exports))
   (refx/dispatch-sync
-   [::ds/init-db
+   [::datastore/init
     {:current-route   nil
      :datastore-ready false
      :user            nil
      :slug            nil
      :games           nil}])
-  (refx/dispatch-sync [::ds/user-get])
+  (refx/dispatch-sync [::user/get])
   ;; (refx/dispatch-sync [::event/init-listeners])
   ;; (routing/init-routes!)
   (init-hub-listeners!
-   [["datastore" "ready"  ::ds/datastore-ready]
-    ["auth"      "signIn" ::ds/user-get]])
+   [["datastore" "ready"  ::datastore/ready]
+    ["auth"      "signIn" ::user/get]])
   (uix.dom/render-root
    ($ view/main)
    (uix.dom/create-root (js/document.getElementById "app"))))
