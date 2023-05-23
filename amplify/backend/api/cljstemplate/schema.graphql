@@ -1,5 +1,51 @@
-type Todo @model @auth(rules: [{allow: private}]) {
+type Player @model @key(name: "byOwner", fields: ["owner"], queryField: "playerByOwner") @key(name: "byGame", fields: ["gameID"], queryField: "playerByGameID") @auth(rules: [{allow: private, operations: [create, read]}, {allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: groups, groupsField: "gameID", operations: [read, create, update, delete]}]) {
   id: ID!
-  name: String!
-  description: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  owner: String
+  gameID: ID
 }
+
+type Game @model @key(name: "byOwner", fields: ["owner"], queryField: "gameByOwner") @key(name: "bySlug", fields: ["slug"], queryField: "gameBySlug") @auth(rules: [{allow: private, operations: [create, read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: owner, operations: [create, update, delete]}]) {
+  id: ID!
+  name: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  slug: String
+  owner: String
+  players: [Player] @connection(keyName: "byGame", fields: ["id"])
+}
+
+# input InviteUsersInput {
+#   gameID: ID!
+#   invites: [String!]!
+# }
+
+# input Record {
+#   messageId: ID
+#   body: String!
+# }
+
+# input TemplateData {
+#   gameID: ID!
+#   username: String!
+#   title: String!
+#   heading: String!
+#   content: String!
+#   assetsBucket: String!
+#   gameName: String!
+# }
+
+# input EmailInput {
+#   gameID: ID!
+#   Template: String!
+#   TemplateData: TemplateData!
+#   emailAddress: String
+# }
+
+# type Mutation @aws_iam @aws_cognito_user_pools {
+#   inviteUsers(input: InviteUsersInput!): AWSJSON! @function(name: "inviteUsers-${env}")
+#   sendEmail(Records: [Record!]!): AWSJSON! @function(name: "sendEmail-${env}")
+#   queueEmail(input: EmailInput!): AWSJSON!
+#   emailNotification(input: AWSJSON!): AWSJSON! @function(name: "emailNotification-${env}")
+# }

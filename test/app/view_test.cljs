@@ -8,18 +8,18 @@
    [promesa.core :as p]
    [refx.alpha :as refx]))
 
-(deftest todos-test
-  (testing "todos"
+(deftest games-test
+  (testing "games"
     (async
      done
-     (rtl/render ($ comp/todos))
-     (is (some? (.queryByTestId rtl/screen "todos-title")))
-     (is (nil? (.queryByTestId rtl/screen "todos")))
+     (rtl/render ($ comp/games))
+     (is (some? (.queryByTestId rtl/screen "games-title")))
+     (is (nil? (.queryByTestId rtl/screen "games")))
 
      (p/do
-       (refx/dispatch-sync [::ds/init-db {:todos [{:id "10"}]}])
-       (rtl/waitFor #(.getByTestId rtl/screen "todos"))
+       (refx/dispatch-sync [::ds/init-db {:games [{:id "10"}]}])
+       (rtl/waitFor #(.getByTestId rtl/screen "games"))
        (is (= "[{:id \"10\"}]"
-              (.-textContent (.getByTestId rtl/screen "todos"))))
+              (.-textContent (.getByTestId rtl/screen "games"))))
        (rtl/cleanup)
        (done)))))

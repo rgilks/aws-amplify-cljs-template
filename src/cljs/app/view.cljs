@@ -8,22 +8,22 @@
    [refx.alpha :as refx]))
 
 (refx/reg-sub
- ::todos
- (fn [db] (:todos db)))
+ ::games
+ (fn [db] (:games db)))
 
-(defui todos []
-  (let [todos (refx/use-sub [::todos])
-        _ (println "todos" todos)]
+(defui games []
+  (let [games (refx/use-sub [::games])
+        _ (println "games" games)]
     ($ :div
        ($ :div
-          {:data-testid "todos-title"
+          {:data-testid "games-title"
            :style {:color "white"}}
-          "TODO LIST")
-       (when todos
+          "GAMES LIST")
+       (when games
          ($ :div
-            {:data-testid "todos"
+            {:data-testid "games"
              :style {:color "white"}}
-            (str todos))))))
+            (str games))))))
 
 (defui main []
   ($ :<>
@@ -33,4 +33,4 @@
               ($ :div
                  {:style {:color "white"}}
                  "YOU ARE LOGGED IN!")
-              ($ todos))))))
+              ($ games))))))

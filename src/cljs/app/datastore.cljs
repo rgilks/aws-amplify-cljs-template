@@ -46,7 +46,7 @@
  (fn
    [{:keys [db]} [_]]
    (println "Datastore ready")
-   (let [models  [[:todos models/Todo]]]
+   (let [models  [[:games models/Game]]]
      {:get-items models
       :subscribe models
       :db (assoc db :datastore-ready true)})))
