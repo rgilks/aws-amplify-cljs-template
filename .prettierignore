@@ -1,28 +1,34 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-/.nyc_output
-/out
-
-# production
-/build
-
 # Editors
 .idea
 *.iml
 .vscode
 
-cypress/videos
-cypress/screenshots
+# Amplify
+amplify/#current-cloud-backend
+amplify/.config/local-*
+amplify/backend/amplify-meta.json
+amplify/backend/api/**/CustomResources.json
+amplify/backend/api/**/parameters.json
+amplify/backend/api/**/transform.conf.json
+amplify/backend/auth/userPoolGroups/template.json
+amplify/backend/awscloudformation
+amplify/backend/backend-config.json
+amplify/backend/function/**/*cloudformation-template.json
+amplify/backend/function/**/coverage
+amplify/backend/function/**/layer-runtimes.json
+amplify/backend/storage/**/*cloudformation-template.json
+amplify/cli.json
+amplify/hooks
+amplify/mock-data
+amplify/team-provider-info.json
+amplify-gradle-config.json
+amplifyxc.config
+aws-exports.js
+awsconfiguration.json
+amplifyconfiguration.json
 
-data/migrate/.temp/
-
+# Clojure
 /target
-/out
 *.cljs
 *.clj
 .clj-kondo
@@ -30,89 +36,78 @@ data/migrate/.temp/
 cljs-runtime
 .cpcache
 .lsp
+.nrepl-port
 .github
 .calva
 
-#amplify
-amplify/#current-cloud-backend
-amplify/.config/local-*
-amplify/mock-data
-amplify/hooks
-amplify/backend/amplify-meta.json
-amplify/backend/awscloudformation
-build/
-public/
-dist/
-node_modules/
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplify-gradle-config.json
-amplifyxc.config
+# Cypress
+cypress/videos
+cypress/screenshots
 
-amplify/backend/storage/**/*cloudformation-template.json
-amplify/backend/function/**/*cloudformation-template.json
-amplify/backend/function/**/layer-runtimes.json
-amplify/backend/auth/userPoolGroups/template.json
-amplify/backend/api/**/transform.conf.json
-amplify/backend/api/**/parameters.json
-amplify/backend/api/**/CustomResources.json
-amplify/backend/backend-config.json
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-amplify/team-provider-info.json
-amplify/cli.json
-
-amplify/backend/function/**/coverage
-
+# Email templates
 emailTemplates/
 
-
-# misc
-.DS_Store
+# Environment files
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env
-.gitignore
+
+# File types
+*.bin
+*.drawio
+*.edn
+*.feature
+*.gif
+*.glb
+*.glsl
+*.ico
+*.jar
+*.jfif
+*.jpg
+*.jpeg
+*.mp3
+*.png
+*.psd
+*.puml
+*.sh
+*.state
+*.svg
+*.txt
+*.vtl
+*.webp
+*.xml
+*.zip
+*.disabled
+
+# Linting and formatting
 .prettierignore
 .eslintcache
 .eslintignore
 
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 yarn.lock
 
-*.webp
-*.jpg
-*.jpeg
-*.psd
-*.vtl
-*.png
-*.svg
-*.gif
-*.puml
-*.feature
-*.state
-*.disabled
-*.sh
-*.jar
-*.txt
-*.ico
-*.zip
-*.drawio
-*.jfif
+# Misc
+.DS_Store
+data/migrate/.temp/
+.gitignore
 
-*.mp3
+# Production
+/build
+/dist
+/public
 
-*.glsl
-*.glb
-
-*.bin
-
-*.xml
-*.edn
-
-.nrepl-port
-
+# Testing
+/coverage
+/.nyc_output
+/out

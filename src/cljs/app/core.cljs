@@ -24,8 +24,7 @@
   (-> amplify/Amplify (.configure aws-exports))
   (refx/dispatch-sync
    [::ds/init-db
-    {:page-visible    true
-     :current-route   nil
+    {:current-route   nil
      :datastore-ready false
      :user            nil
      :slug            nil

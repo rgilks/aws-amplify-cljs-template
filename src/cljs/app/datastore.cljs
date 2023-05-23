@@ -1,7 +1,7 @@
 (ns app.datastore
   (:require
    ["aws-amplify" :as amplify]
-   [promesa.core :as p] 
+   [promesa.core :as p]
    [app.ut :as ut]
    ["models" :as models]
    [refx.alpha :as refx]))
@@ -13,11 +13,11 @@
 
 (defn configure [game-id username]
   (p/do
-    (.configure amplify/DataStore
-                (clj->js {:amplify/syncExpressions (sync-expressions game-id username)}))
+    (.configure
+     amplify/DataStore
+     (clj->js {:amplify/syncExpressions (sync-expressions game-id username)}))
     (.stop amplify/DataStore))
   (js/setTimeout #(.start amplify/DataStore) 1000))
-
 
 (refx/reg-event-db
  ::init-db
@@ -26,18 +26,14 @@
 (refx/reg-event-db
  ::update-models-db
  (fn [db [_ model-key data]]
-   (let [updated (assoc db model-key data)]
-     (println "updated" updated)
-     updated)))
+   (assoc db model-key data)))
 
 (refx/reg-fx
  :get-items
  (fn [models]
-   (println "GET ITEMS")
    (doseq [[key model] models]
      (p/let [result (.query amplify/DataStore model)
              data (ut/obj->clj result)
-             _ (println "GET ITEMS" key data)
              keyed-data (reduce #(assoc %1 (:id %2) %2) {} data)]
        (refx/dispatch [::update-models-db key keyed-data])))))
 
@@ -45,7 +41,6 @@
  ::datastore-ready
  (fn
    [{:keys [db]} [_]]
-   (println "Datastore ready")
    (let [models  [[:games models/Game]]]
      {:get-items models
       :subscribe models
@@ -63,7 +58,6 @@
  (fn [db [_ model-key id]]
    (println "DELETE MODEL" model-key id)
    (update db model-key dissoc id)))
-
 
 (refx/reg-event-db
  ::update-model
@@ -93,21 +87,21 @@
    [{:keys [db]} [_ game-id]]
    (let [username (:username db)]
      {:datastore-configure [game-id username]
-      :db                  (assoc db :datastore-ready false)})))
+      :db (assoc db :datastore-ready false)})))
+
+(defn is-unsubscribed? [user]
+  (= "true" (get (js->clj (.-attributes user)) "custom:unsubscribed")))
 
 (refx/reg-event-fx
  ::user-update
  (fn [{:keys [db]} [_ user]]
-   (let [username
-         (.-username user)
-         unsubscribed
-         (= "true"
-            (get (js->clj (.-attributes user)) "custom:unsubscribed"))
+   (let [username (.-username user)
+         unsubscribed (is-unsubscribed? user)
          fx {:db (assoc db
                         :user user
                         :username username
                         :unsubscribed unsubscribed)}]
-     (println "UPDATE USER" username)
+     (println "Update user" username)
      (merge fx {:dispatch [::datastore-configure "UNKNOWN"]}))))
 
 (refx/reg-fx
@@ -115,7 +109,7 @@
  (fn []
    (-> (p/let [user (.currentAuthenticatedUser amplify/Auth)]
          (refx/dispatch [::user-update user]))
-       (p/catch #(println "GET-USER: " %)))))
+       (p/catch #(println "Get user" %)))))
 
 (refx/reg-event-fx
  ::user-get
