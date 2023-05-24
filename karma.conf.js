@@ -1,5 +1,5 @@
 module.exports = function (config) {
-  var junitOutputDir = process.env.CIRCLE_TEST_REPORTS || 'target/junit'
+  var junitOutputDir = process.env.CIRCLE_TEST_REPORTS || 'karma/junit'
 
   config.set({
     browsers: ['ChromeHeadlessNoSandbox'],
@@ -9,8 +9,8 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    basePath: 'out/js',
-    files: ['libs/bundle.js', 'karma-test.js'],
+    basePath: 'karma/js',
+    files: ['libs/bundle.js', 'test.js'],
     frameworks: ['cljs-test'],
     plugins: [
       'karma-cljs-test',

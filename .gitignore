@@ -43,7 +43,7 @@ report.html
 /.lsp
 .cpcache
 .jest
-/out/js
+/karma/js
 /public/js
 /target/
 

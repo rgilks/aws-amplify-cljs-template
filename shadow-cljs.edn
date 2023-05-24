@@ -20,6 +20,6 @@
                               :closure-defines  {"re_frame.trace.trace_enabled_QMARK_" true}}}
   :karma-test   {:target     :karma
                  :compiler-options {:output-feature-set :es-next}
-                 :js-options {:js-provider :external :external-index "out/index.js"}
-                 :output-to  "out/js/karma-test.js"}}}
+                 :js-options {:js-provider :external :external-index "karma/index.js"}
+                 :output-to  "karma/js/test.js"}}}
 

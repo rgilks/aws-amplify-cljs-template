@@ -110,4 +110,4 @@ data/migrate/.temp/
 # Testing
 /coverage
 /.nyc_output
-/out
+/karma/js

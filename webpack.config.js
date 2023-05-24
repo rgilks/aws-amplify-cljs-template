@@ -33,9 +33,9 @@ const appConfig = {
 
 const testConfig = {
   mode: 'development',
-  entry: './out/index.js',
+  entry: './karma/index.js',
   output: {
-    path: path.resolve(__dirname, 'out'),
+    path: path.resolve(__dirname, 'karma'),
     filename: 'js/libs/bundle.js',
     clean: false
   },
