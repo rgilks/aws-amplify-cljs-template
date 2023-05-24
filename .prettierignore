@@ -1,0 +1,112 @@
+# Editors
+.idea
+*.iml
+.vscode
+
+# Amplify
+amplify/#current-cloud-backend
+amplify/.config/local-*
+amplify/backend/amplify-meta.json
+amplify/backend/api/**/CustomResources.json
+amplify/backend/api/**/parameters.json
+amplify/backend/api/**/transform.conf.json
+amplify/backend/auth/userPoolGroups/template.json
+amplify/backend/awscloudformation
+amplify/backend/backend-config.json
+amplify/backend/function/**/*cloudformation-template.json
+amplify/backend/function/**/coverage
+amplify/backend/function/**/layer-runtimes.json
+amplify/backend/storage/**/*cloudformation-template.json
+amplify/cli.json
+amplify/hooks
+amplify/mock-data
+amplify/team-provider-info.json
+amplify-gradle-config.json
+amplifyxc.config
+aws-exports.js
+awsconfiguration.json
+amplifyconfiguration.json
+
+# Clojure
+/target
+*.cljs
+*.clj
+.clj-kondo
+.shadow-cljs
+cljs-runtime
+.cpcache
+.lsp
+.nrepl-port
+.github
+.calva
+
+# Cypress
+cypress/videos
+cypress/screenshots
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Email templates
+emailTemplates/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# File types
+*.bin
+*.drawio
+*.edn
+*.feature
+*.gif
+*.glb
+*.glsl
+*.ico
+*.jar
+*.jfif
+*.jpg
+*.jpeg
+*.mp3
+*.png
+*.psd
+*.puml
+*.sh
+*.state
+*.svg
+*.txt
+*.vtl
+*.webp
+*.xml
+*.zip
+*.disabled
+
+# Linting and formatting
+.prettierignore
+.eslintcache
+.eslintignore
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+
+# Misc
+.DS_Store
+data/migrate/.temp/
+.gitignore
+
+# Production
+/build
+/dist
+
+# Testing
+/coverage
+/.nyc_output
+/karma/js

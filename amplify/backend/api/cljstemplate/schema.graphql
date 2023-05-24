@@ -1,0 +1,17 @@
+type Player @model @auth(rules: [{allow: private}, {allow: owner}]) {
+  id: ID!
+  gameID: ID! @index(name: "byGame")
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  owner: String
+}
+
+type Game @model @auth(rules: [{allow: private}, {allow: owner}]) {
+  id: ID!
+  name: String
+  slug: String
+  players: [Player] @hasMany(indexName: "byGame", fields: ["id"])
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  owner: String
+}
