@@ -105,7 +105,6 @@ data/migrate/.temp/
 # Production
 /build
 /dist
-/public
 
 # Testing
 /coverage

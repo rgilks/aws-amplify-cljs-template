@@ -15,7 +15,7 @@ frontend:
         # - printenv
         - yarn ci
   artifacts:
-    baseDirectory: public
+    baseDirectory: dist
     files:
       - '**/*'
   cache:

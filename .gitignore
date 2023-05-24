@@ -44,7 +44,7 @@ report.html
 .cpcache
 .jest
 /karma/js
-/public/js
+/dist/js
 /target/
 
 # Node.js dependencies

@@ -43,7 +43,7 @@
   },
   "scripts": {
     "update": "ncu -u && rm -rf node_modules && rm yarn.lock && yarn",
-    "nuke": "rm -rf public/js .shadow-cljs node_modules yarn.lock target karma/js report.html",
+    "nuke": "rm -rf dist/js .shadow-cljs node_modules yarn.lock target karma/js report.html",
     "clear": "rm -rf target karma/js report.html",
     "lint": "clj-kondo --lint ./ --dependencies --parallel --copy-configs",
     "pretty": "prettier --write '**/*.*'",
