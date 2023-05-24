@@ -1,0 +1,25 @@
+{:nrepl        {:port 8775}
+ :source-paths ["src/cljs" "test"]
+ :dependencies [[metosin/reitit "0.7.0-alpha4"]
+                [metosin/malli "0.11.0"]
+                [com.velisco/strgen "0.2.4"]
+                [funcool/promesa "10.0.594"]
+                [com.pitch/uix.core "0.9.1"]
+                [com.pitch/uix.dom "0.9.1"]
+                [com.fbeyer/refx "0.0.49"]]
+ :dev-http     {3000 "dist"}
+ :builds
+ {:app          {:target     :browser
+                 :output-dir "dist/js"
+                 :asset-path "/js"
+                 :js-options {:js-provider :external :external-index "target/index.js"}
+                 :modules    {:main {:init-fn app.core/main}}
+                 :compiler-options {:output-feature-set :es-next}
+                 :dev        {:compiler-options {:warnings {:redef false}
+                                                 :output-feature-set :es-next}
+                              :closure-defines  {"re_frame.trace.trace_enabled_QMARK_" true}}}
+  :karma-test   {:target     :karma
+                 :compiler-options {:output-feature-set :es-next}
+                 :js-options {:js-provider :external :external-index "karma/index.js"}
+                 :output-to  "karma/js/test.js"}}}
+

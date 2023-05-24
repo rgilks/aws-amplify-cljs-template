@@ -1,0 +1,2 @@
+{:linters {:unresolved-symbol {:exclude [(devcards.core/defcard)]}}
+ :lint-as {uix.core/defui clojure.core/defn}}

@@ -1,0 +1,31 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "semi": false,
+  "bracketSpacing": false,
+  "trailingComma": "none",
+  "printWidth": 80,
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": "amplify/**/*.json",
+      "options": {
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": "amplify/backend/function/**/*-cloudformation-template.json",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "schema.graphql",
+      "options": {
+        "printWidth": 9000
+      }
+    }
+  ]
+}

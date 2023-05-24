@@ -1,0 +1,15 @@
+{
+    "providers": ["awscloudformation"],
+    "projectName": "cljstemplate",
+    "version": "3.1",
+    "frontend": "javascript",
+    "javascript": {
+        "framework": "react",
+        "config": {
+            "SourceDir": "src/amplify",
+            "DistributionDir": "public",
+            "BuildCommand": "npm run-script build",
+            "StartCommand": "npm run-script start"
+        }
+    }
+}

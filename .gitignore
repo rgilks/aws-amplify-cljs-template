@@ -1,0 +1,50 @@
+amplify/\#current-cloud-backend
+amplify/.config/local-*
+amplify/backend/amplify-meta.json
+amplify/backend/.temp
+amplify/logs
+amplify/mock-api-resources
+amplify/mock-data
+amplify-build-config.json
+amplifyconfiguration.dart
+amplifyconfiguration.json
+amplify-gradle-config.json
+amplifytools.xcconfig
+aws-exports.js
+awsconfiguration.json
+build/
+**.sample
+.secret-*
+
+# Generated files
+/src/amplify/ui-components/
+/src/amplify/graphql/
+
+# Editors
+.idea
+*.iml
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.DS_Store
+.nrepl-port
+
+# Shadow-CLJS
+/.shadow-cljs
+report.html
+
+# Generated files
+/.clj-kondo/.cache
+/.lsp
+.cpcache
+.jest
+/karma/js
+/dist/js
+/target/
+
+# Node.js dependencies
+/node_modules
