@@ -1,9 +1,93 @@
-# AWS AMPLIFY CLJS TEMPLATE
+# AWS Amplify ClojureScript Template
 
-This is an early work in progress...
+This is a ClojureScript project template for AWS Amplify. This project is set up with AWS Amplify, Amplify UI components, React, Material UI, emotion for CSS-in-JS, and various other dependencies.
 
-The idea is to have have a good starting point I can use for personal projects
-using my favorite technologies.
+## Features
+
+- AWS Amplify integration
+- Uses Material UI and emotion for styling
+- Code formatting with Prettier
+- Linting with clj-kondo
+- Testing with Karma
+- Continuous integration set up with Amplify
+
+## Requirements
+
+This project requires Node.js and npm. The required versions are:
+
+- Node.js: >=16.0.0
+- npm: >=8.0.0
+
+## Initial Setup
+
+1. Install Amplify CLI: If you haven't used Amplify before, or don't have a profile set up on the AWS account you plan to use, follow the [Amplify CLI Installation Guide](https://docs.amplify.aws/cli/start/install/).
+
+2. Setup Amplify: Follow the guide on [Amplify CLI Workflows](https://docs.amplify.aws/cli/start/workflows/) to set up Amplify for your project.
+
+## Running the Project
+
+To run the project, you need to start webpack, the development server, and the Karma test runner in separate terminals.
+
+1. Start the development server:
+
+   In a separate terminal, run `yarn watch`.
+
+2. Start webpack:
+
+   In a terminal, run `yarn webpack`. Note that you might see some errors initially until the build processes are complete.
+
+3. Start the Karma test runner:
+
+   In a third terminal, run `yarn karma`.
+
+## DataStore
+
+The project uses AWS Amplify DataStore for managing application data.
+
+![DataStore](/docs/datastore.webp?raw=true)
+
+# JavaScript Technologies
+
+This project primarily relies on several JavaScript technologies and libraries. The key dependencies are:
+
+- [AWS Amplify](https://aws.amazon.com/amplify/): A set of tools and services that enables developers to build scalable and secure cloud applications. The project uses `@aws-amplify/auth` for authentication, `@aws-amplify/datastore` for data storage and synchronization, and `@aws-amplify/ui-react` for user interface components.
+
+- [React](https://reactjs.org/): A JavaScript library for building user interfaces. The project also uses `react-dom` for DOM-specific methods and `react-test-renderer` for testing.
+
+- [Material-UI](https://mui.com/): A popular React UI framework. The project uses `@material-ui/core` and `@mui/material` for core components, `@material-ui/icons` and `@mui/icons-material` for icons, `@mui/lab` for advanced UI components, `@mui/styles` for styling, and `@mui/system` for utility functions.
+
+- [React JSON Schema Form (rjsf)](https://github.com/rjsf-team/react-jsonschema-form): A React component for building Web forms from JSON Schema. The project uses `@rjsf/core`, `@rjsf/mui`, `@rjsf/utils`, and `@rjsf/validator-ajv6`.
+
+- [Howler.js](https://howlerjs.com/): An audio library for the modern web.
+
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/): A lightweight solution for testing React components.
+
+- [Webpack](https://webpack.js.org/): A module bundler for modern JavaScript applications.
+
+# ClojureScript Technologies
+
+The project also uses several ClojureScript libraries:
+
+- [Shadow-cljs](https://shadow-cljs.github.io/docs/UsersGuide.html): A ClojureScript compiler which seamlessly integrates with JavaScript development tools.
+
+- [Reitit](https://metosin.github.io/reitit/): A fast data-driven router for Clojure(Script).
+
+- [Malli](https://github.com/metosin/malli): A data-driven schema library for Clojure/Script.
+
+- [Promesa](https://funcool.github.io/promesa/latest/): A promise library for Clojure(Script).
+
+- [UIx](https://pitch-io.github.io/uix/): An idiomatic ClojureScript interface to modern React.js.
+
+- [refx](https://github.com/fbeyer/refx): A ClojureScript library for maintaining and manipulating local state in a functional and declarative manner.
+
+Please consult the respective documentation of each dependency to understand its usage and functionality in the project.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+
+# NOTES
 
 ## Setting up Amplify
 
@@ -87,24 +171,3 @@ Learn more about "@auth" authorization rules here: https://docs.amplify.aws/cli/
 ✅ GraphQL schema compiled successfully.
 
 ```
-
-Run the following in separate terminals
-
-```
-yarn webpack
-```
-
-The webpack terminal will display some errors until the builds run by the following
-command are complete.
-
-```
-yarn watch
-```
-
-```
-yarn karma
-```
-
-## DataStore
-
-![DataStore](/docs/datastore.webp?raw=true)
