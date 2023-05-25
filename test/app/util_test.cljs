@@ -1,7 +1,7 @@
-(ns app.ut-test
+(ns app.util-test
   (:require
    [cljs.test :refer [deftest is]]
-   [app.ut :as ut]))
+   [app.util :as ut]))
 
 (deftest iso-time-test
   (let [result (ut/iso-time)]

@@ -1,9 +1,10 @@
-(ns app.ut)
+(ns app.util)
 
 (defn iso-time
   "Return the current time in ISO format."
   [] (.toISOString (js/Date.)))
 
+;; TODO: Figure out a better way to do this.
 (defn obj->clj
   "Convert a JS object to a Clojure map."
   [obj]
