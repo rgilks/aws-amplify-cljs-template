@@ -2,7 +2,7 @@
   (:require
    ["aws-amplify" :as amplify]
    [promesa.core :as p]
-   [app.ut :as ut]
+   [app.util :as ut]
    ["models" :as models]
    [refx.alpha :as refx]))
 
