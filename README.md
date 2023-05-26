@@ -30,15 +30,65 @@ To run the project, you need to start webpack, the development server, and the K
 
 1. Start the development server:
 
-   In a separate terminal, run `yarn watch`.
+run `yarn watch`.
 
-2. Start webpack:
+1. Start webpack:
 
-   In a terminal, run `yarn webpack`. Note that you might see some errors initially until the build processes are complete.
+   In a second terminal, run `yarn webpack`. Note that you might see some errors
+   initially until the build processes are complete.
 
-3. Start the Karma test runner:
+2. Start the Karma test runner:
 
    In a third terminal, run `yarn karma`.
+
+## Cypress Tests
+
+Some of the Cypress tests check that an email is received, for this to work you 
+need to create some test email accounts and set things up so they can be accessed
+by the GMail api.
+
+Create 2 test user email accounts following the instructions for gmail-tester: https://github.com/levz0r/gmail-tester (they seem a bit out of date though), the following is what I did:
+
+1. Copy `gmail-test-users-example.json` and rename it to `gmail-test-users.json` update the details in this file as you work though this process
+2. Create a new gmail account
+3. Log into the account and go to https://console.cloud.google.com/projectselector2/apis/credentials?supportedpurview=project
+4. Create a Project (you don't really need to create an organisation)
+5. Click `CONFIGURE CONSENT SCREEN`, select User Type `External`, create an app, the details don't matter.
+6. When you get to the Test users screen, click `ADD USERS` enter the test email address you are setting up and click `SAVE`
+7. Click `SAVE AND CONTINUE`
+8. Click `Credentials` in the menu and then `CREATE CREDENTIALS`
+9. Select `OAuth client ID`
+10. Select Application type: `Desktop app`, add a name if you want
+11. Click `CREATE`
+12. Click `DOWNLOAD JSON`, put the file in the root of the project for now and rename it `credentials.json`
+13. Click `Enabled APIs and services` then `ENABLE APIS AND SERVICES`, search for and select `Gmail API` and click `ENABLE`
+14. In a terminal at the root of the project run 
+```
+yarn install
+
+node node_modules/gmail-tester/init.js credentials.json token.json TEST_EMAIL_ADDRESS
+```
+15. A browser window will open, select the account you with to use.
+16. You will see a message like `Google hasn't verified this app`, just click `Continue`, click `Continue` again when asked about access.
+17. A token.json file will now appear in the root of the project.
+18. Update `gmail-test-users.json` with the details with the credentials and tokens you just created.
+
+Now we want to store this information in AWS Secrets Manager
+
+1. Got to `https://eu-west-1.console.aws.amazon.com/secretsmanager/listsecrets`
+2. Click `Store a new secret`
+3. Select `other type of secret`
+4. Click plain test and copy the contents of your `gmail-test-users.json` file there
+5. Use the `aws/secretsmanager` encryption key
+6. Click `Next`
+7. The Secret name is `cypress/test-users`
+8. Click `Next` then `Next` again
+9. Click `Store`
+10. Check your secret is there and the value is correct
+
+In the Amplify Console on AWS create an environment variable called `CYPRESS_CONFIG` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
+
+**Delete the files you created while performing this task, i.e credentials.json, token.json and gmail-test-users.json**
 
 ## DataStore
 
