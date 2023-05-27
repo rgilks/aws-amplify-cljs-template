@@ -43,7 +43,7 @@ run `yarn watch`.
 
 ## Cypress Tests
 
-Some of the Cypress tests check that an email is received, for this to work you 
+Some of the Cypress tests check that an email is received, for this to work you
 need to create some test email accounts and set things up so they can be accessed
 by the GMail api.
 
@@ -62,12 +62,14 @@ Create 2 test user email accounts following the instructions for gmail-tester: h
 11. Click `CREATE`
 12. Click `DOWNLOAD JSON`, put the file in the root of the project for now and rename it `credentials.json`
 13. Click `Enabled APIs and services` then `ENABLE APIS AND SERVICES`, search for and select `Gmail API` and click `ENABLE`
-14. In a terminal at the root of the project run 
+14. In a terminal at the root of the project run
+
 ```
 yarn install
 
 node node_modules/gmail-tester/init.js credentials.json token.json TEST_EMAIL_ADDRESS
 ```
+
 15. A browser window will open, select the account you with to use.
 16. You will see a message like `Google hasn't verified this app`, just click `Continue`, click `Continue` again when asked about access.
 17. A token.json file will now appear in the root of the project.
@@ -89,6 +91,8 @@ Now we want to store this information in AWS Secrets Manager
 In the Amplify Console on AWS create an environment variable called `CYPRESS_CONFIG` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
 
 **Delete the files you created while performing this task, i.e credentials.json, token.json and gmail-test-users.json**
+
+Create accounts in the app for your test users, with user names `testUser1` and `testUser2` with the passwords from the file.
 
 ## DataStore
 
