@@ -48,7 +48,7 @@ async function setupNodeEvents(on, config) {
 
 module.exports = defineConfig({
   e2e: {
-    defaultCommandTimeout: 120000,
+    defaultCommandTimeout: 20000,
     watchForFileChanges: true,
     experimentalStudio: true,
     baseUrl: 'http://localhost:3000',

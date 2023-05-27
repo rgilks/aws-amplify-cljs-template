@@ -58,8 +58,8 @@
     "dev-build": "shadow-cljs compile app",
     "shadow-cljs-server": "shadow-cljs server",
     "webpack": "webpack --watch",
-    "cypress": "cypress open",
-    "cypress:run": "cypress run --headless --browser chrome"
+    "cypress": "CYPRESS_TEST_USERS=$(aws secretsmanager get-secret-value --secret-id cypress/test-users --query SecretString --output text) cypress open",
+    "cypress:run": "CYPRESS_TEST_USERS=$(aws secretsmanager get-secret-value --secret-id cypress/test-users --query SecretString --output text) cypress run"
   },
   "eslintConfig": {
     "extends": [

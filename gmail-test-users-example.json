@@ -1,5 +1,5 @@
 {
-  "TEST_USER1001": {
+  "testUser1": {
     "email": "TEST_USER1001@gmail.com",
     "password": "PASSWORD_1",
     "creds": {
@@ -21,7 +21,7 @@
       "expiry_date": "EXPIRY_DATE_1"
     }
   },
-  "TEST_USER1002": {
+  "testUser2": {
     "email": "TEST_USER1002@gmail.com",
     "password": "PASSWORD_2",
     "creds": {

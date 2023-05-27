@@ -21,3 +21,22 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+
+test:
+  phases:
+    preTest:
+      commands:
+        - yarn install --frozen-lockfile
+        - yarn add mocha mochawesome mochawesome-merge mochawesome-report-generator
+    test:
+      commands:
+        - npx start-test 'yarn shadow-cljs-server' 3000 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
+    postTest:
+      commands:
+        - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
+  artifacts:
+    baseDirectory: cypress
+    configFilePath: '**/mochawesome.json'
+    files:
+      - '**/*.png'
+      - '**/*.mp4'
