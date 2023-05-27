@@ -88,7 +88,7 @@ Now we want to store this information in AWS Secrets Manager
 9. Click `Store`
 10. Check your secret is there and the value is correct
 
-In the Amplify Console on AWS create an environment variable called `CYPRESS_CONFIG` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
+In the Amplify Console on AWS create an environment variable called `CYPRESS_TEST_USERS` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
 
 **Delete the files you created while performing this task, i.e credentials.json, token.json and gmail-test-users.json**
 
@@ -136,9 +136,28 @@ The project also uses several ClojureScript libraries:
 
 Please consult the respective documentation of each dependency to understand its usage and functionality in the project.
 
-## License
+## Amplify Build Image
 
-This project is licensed under the [MIT License](LICENSE).
+The provided `Dockerfile` is used to construct the build image utilized by the Amplify Console.
+
+`public.ecr.aws/n1r2w5d4/tre-amplify-custom-image` is available publicly, so you can just use that if you like.
+
+To build and deploy your own, create a public repository in ECR, then run the following commands replacing 
+`n1r2w5d4/tre-amplify-custom-image` with your own registry alias and repository name.
+
+1. Authenticate your Docker client with your registry:
+
+```bash
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n1r2w5d4
+```
+
+1. Build, tag, and push the container to the ECR repository:
+
+```bash
+docker buildx build --platform linux/amd64 --push -t public.ecr.aws/n1r2w5d4/tre-amplify-custom-image .
+```
+
+By following these instructions, you can update the Docker image in your ECR repository.
 
 # NOTES
 
@@ -224,3 +243,8 @@ Learn more about "@auth" authorization rules here: https://docs.amplify.aws/cli/
 ✅ GraphQL schema compiled successfully.
 
 ```
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
