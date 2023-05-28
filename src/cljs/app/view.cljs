@@ -29,6 +29,7 @@
         ($ Div100vh
            ($ :div
               ($ :div
-                 {:style {:color "white"}}
+                 {:data-testid "logged-in"
+                  :style {:color "white"}}
                  "YOU ARE LOGGED IN!")
               ($ games))))))
