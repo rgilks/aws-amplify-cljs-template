@@ -49,7 +49,7 @@ by the GMail api.
 
 Create 2 test user email accounts following the instructions for gmail-tester: https://github.com/levz0r/gmail-tester (they seem a bit out of date though), the following is what I did:
 
-1. Copy `gmail-test-users-example.json` and rename it to `gmail-test-users.json` update the details in this file as you work though this process
+1. Copy `cypress-config-example.json` and rename it to `cypress-config.json` update the details in this file as you work though this process
 2. Create a new gmail account
 3. Log into the account and go to https://console.cloud.google.com/projectselector2/apis/credentials?supportedpurview=project
 4. Create a Project (you don't really need to create an organisation)
@@ -73,27 +73,26 @@ node node_modules/gmail-tester/init.js credentials.json token.json TEST_EMAIL_AD
 15. A browser window will open, select the account you with to use.
 16. You will see a message like `Google hasn't verified this app`, just click `Continue`, click `Continue` again when asked about access.
 17. A token.json file will now appear in the root of the project.
-18. Update `gmail-test-users.json` with the details with the credentials and tokens you just created.
+18. Update `cypress-config.json` with the details with the credentials and tokens you just created.
 
 Now we want to store this information in AWS Secrets Manager
 
 1. Got to `https://eu-west-1.console.aws.amazon.com/secretsmanager/listsecrets`
 2. Click `Store a new secret`
 3. Select `other type of secret`
-4. Click plain test and copy the contents of your `gmail-test-users.json` file there
+4. Click plain test and copy the contents of your `cypress-config.json` file there
 5. Use the `aws/secretsmanager` encryption key
 6. Click `Next`
-7. The Secret name is `cypress/test-users`
+7. The Secret name is `cypress/config`
 8. Click `Next` then `Next` again
 9. Click `Store`
 10. Check your secret is there and the value is correct
 
-In the Amplify Console on AWS create an environment variable called `CYPRESS_TEST_USERS` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
+In `cypress-config.json` set `userPoolId` to the `aws_user_pools_id` value in the `aws-exports.js` file.
 
-Also create an environment variable called `CYPRESS_USER_POOL_ID` and set it to 
-the `aws_user_pools_id` value in the `aws-exports.js` file. NOTE: For the time being you also need to create this variable in your local environment.
+In the Amplify Console on AWS create an environment variable called `CYPRESS_CONFIG` and copy the contents of `cypress-config.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
 
-**Delete the files you created while performing this task, i.e credentials.json, token.json and gmail-test-users.json**
+**Delete the files you created while performing this task, i.e credentials.json, token.json and cypress-config.json**
 
 Create accounts in the app for your test users, with user names `testUser1` and `testUser2` with the passwords from the file.
 

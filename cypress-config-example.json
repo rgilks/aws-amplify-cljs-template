@@ -1,0 +1,49 @@
+{
+  "userPoolId": "USER_POOL_ID",
+  "testUsers": {
+    "testUser1": {
+      "email": "TEST_USER1001@gmail.com",
+      "password": "PASSWORD_1",
+      "creds": {
+        "installed": {
+          "client_id": "CLIENT_ID_1",
+          "project_id": "PROJECT_ID_1",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_secret": "CLIENT_SECRET_1",
+          "redirect_uris": ["http://localhost"]
+        }
+      },
+      "token": {
+        "access_token": "ACCESS_TOKEN_1",
+        "refresh_token": "REFRESH_TOKEN_1",
+        "scope": "https://www.googleapis.com/auth/gmail.readonly",
+        "token_type": "Bearer",
+        "expiry_date": "EXPIRY_DATE_1"
+      }
+    },
+    "testUser2": {
+      "email": "TEST_USER1002@gmail.com",
+      "password": "PASSWORD_2",
+      "creds": {
+        "installed": {
+          "client_id": "CLIENT_ID_2",
+          "project_id": "PROJECT_ID_2",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_secret": "CLIENT_SECRET_2",
+          "redirect_uris": ["http://localhost"]
+        }
+      },
+      "token": {
+        "access_token": "ACCESS_TOKEN_2",
+        "refresh_token": "REFRESH_TOKEN_2",
+        "scope": "https://www.googleapis.com/auth/gmail.readonly",
+        "token_type": "Bearer",
+        "expiry_date": "EXPIRY_DATE_2"
+      }
+    }
+  }
+}
