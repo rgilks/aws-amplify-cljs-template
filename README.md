@@ -90,6 +90,9 @@ Now we want to store this information in AWS Secrets Manager
 
 In the Amplify Console on AWS create an environment variable called `CYPRESS_TEST_USERS` and copy the contents of `gmail-test-users.json` into that, for all branches. see: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
 
+Also create an environment variable called `CYPRESS_USER_POOL_ID` and set it to 
+the `aws_user_pools_id` value in the `aws-exports.js` file. NOTE: For the time being you also need to create this variable in your local environment.
+
 **Delete the files you created while performing this task, i.e credentials.json, token.json and gmail-test-users.json**
 
 Create accounts in the app for your test users, with user names `testUser1` and `testUser2` with the passwords from the file.

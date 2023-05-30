@@ -1,6 +1,9 @@
+const AWS = require('aws-sdk')
 const {defineConfig} = require('cypress')
 const gmail_tester = require('gmail-tester')
 const promisePoller = require('promise-poller').default
+
+const cognito = new AWS.CognitoIdentityServiceProvider()
 
 const findEmail = async (creds, token, options, subject, from) => {
   const failureMessage = from
@@ -30,16 +33,26 @@ async function setupNodeEvents(on, config) {
     getEmailMessages({options, subject, user, from}) {
       const {creds, token} = user
 
-      // Check for messages in the last 2 minutes.
       const date = new Date()
-      options.after = date.setMinutes(date.getMinutes() - 2)
+
+      // Check for messages in the last minute.
+      // options.after = date.setMinutes(date.getMinutes() - 1)
+
+      // Check for messages in the last 10 seconds.
+      options.after = date.setSeconds(date.getSeconds() - 10)
 
       return promisePoller({
         taskFn: () => findEmail(creds, token, options, subject, from),
         interval: 2000,
-        retries: 30,
-        masterTimeout: 60000
+        retries: 15,
+        masterTimeout: 30000
       })
+    }
+  })
+
+  on('task', {
+    deleteTestUser({Username, UserPoolId}) {
+      return cognito.adminDeleteUser({Username, UserPoolId}).promise()
     }
   })
 
