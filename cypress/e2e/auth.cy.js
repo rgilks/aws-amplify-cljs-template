@@ -1,5 +1,4 @@
-const testUsers = Cypress.env('TEST_USERS')
-const UserPoolId = Cypress.env('USER_POOL_ID')
+const {testUsers, userPoolId} = Cypress.env('CONFIG')
 
 const userName = 'testUser1'
 const {email, password} = testUsers[userName]
@@ -85,6 +84,9 @@ describe('Create Account', () => {
 
     cy.findByTestId('logged-in').contains('YOU ARE LOGGED IN!')
 
-    cy.task('deleteTestUser', {Username: timestampedUserName, UserPoolId})
+    cy.task('deleteTestUser', {
+      Username: timestampedUserName,
+      UserPoolId: userPoolId
+    })
   })
 })

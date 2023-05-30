@@ -52,3 +52,5 @@ report.html
 # Cypress
 cypress/videos
 cypress/screenshots
+cypress-config.json
+
