@@ -1,0 +1,4 @@
+{{title}}\r\n
+{{heading}}\r\n
+{{content}}\r\n
+To unsubscribe go to: {{unsubscribeUrl}}\r\n

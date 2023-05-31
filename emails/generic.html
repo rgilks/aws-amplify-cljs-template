@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+</head>
+<body style='margin:0; padding:20px 0px; background-color:#F6F6F6; color: #4d4d4d;'>
+  <div style='background-color: #ffffff; border-radius: 3px; padding: 30px; max-width: 700px; margin: 40px auto;'>
+    {{#if isTestEmail}}
+    <div style='background-color: #2196F3; color: #ffffff; padding: 14px 20px; font-weight: normal; font-size: 16px; font-family: Helvetica, sans-serif; border-radius: 3px; line-height: 22px; margin-bottom: 30px;'>
+      THIS IS A TEST EMAIL
+    </div>
+    {{/if}}
+    <h1 style='font-weight: normal; font-size: 16px; border-bottom: solid 2px #D9D9D9; padding-bottom: 10px; font-family: Helvetica, sans-serif; color: #4d4d4d;'><strong>{{title}}</strong></h1>
+    <div style='font-weight: bold; font-size: 20px; padding: 0 20px 0 20px; margin: 0;font-family: Helvetica, sans-serif; color: #000;'>{{heading}}</div>
+    <div style='font-size: 15px; padding: 0 20px 20px 20px; margin: 0;font-family: Helvetica, sans-serif; color: #000;'>{{content}}</div>
+    <div style='font-size: 11px; padding: 0 20px 20px 20px; margin: 0;font-family: Helvetica, sans-serif; color: #000;'>To unsubscribe <a href='{{unsubscribeUrl}}'>click here</a>.</div>
+  </div>
+</body>
+</html>
