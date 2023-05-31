@@ -89,3 +89,14 @@
       :subscribe models
       :db (assoc db :datastore-ready true)})))
 
+(refx/reg-fx
+ :delete-item
+ (fn [[model id]]
+   (p/let [item (.query amplify/DataStore model id)]
+     (.delete amplify/DataStore item))))
+
+(refx/reg-fx
+ :new-item
+ (fn [[model item]]
+   (.save amplify/DataStore
+          (model. (clj->js item)))))

@@ -27,6 +27,11 @@
          (refx/dispatch [::update user]))
        (p/catch #(println "Get user" %)))))
 
+(refx/reg-fx
+ :update-user-att
+ (fn [[user att]]
+   (.updateUserAttributes amplify/Auth user (clj->js att))))
+
 (refx/reg-event-fx
  ::get
  (fn [_ [_]]
