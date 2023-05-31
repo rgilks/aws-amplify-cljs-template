@@ -54,5 +54,10 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "ses": {
+    "emailTemplates": {
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
