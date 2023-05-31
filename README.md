@@ -2,6 +2,26 @@
 
 This is a ClojureScript project template for AWS Amplify. This project is set up with AWS Amplify, Amplify UI components, React, Material UI, emotion for CSS-in-JS, and various other dependencies.
 
+## Issues
+
+- To get the SES template to deploy with `amplify push` I added an inline policy
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "ses:*",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+This needs to be sorted out
+
 ## Features
 
 - AWS Amplify integration

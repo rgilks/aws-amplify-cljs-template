@@ -42,7 +42,7 @@
     "workbox-precaching": "^6.6.1"
   },
   "scripts": {
-    "deploy-email-templates": "nbb scripts/deploy_email_templates.cljs",
+    "update-email-templates": "nbb scripts/update_email_templates.cljs",
     "update": "ncu -u && rm -rf node_modules && rm yarn.lock && yarn",
     "nuke": "rm -rf dist/js .shadow-cljs node_modules yarn.lock target karma/js report.html",
     "clear": "rm -rf target karma/js report.html",
@@ -82,6 +82,7 @@
   },
   "devDependencies": {
     "@aws-amplify/cli": "^12.0.3",
+    "@aws-sdk/client-cognito-identity-provider": "^3.342.0",
     "@aws-sdk/client-s3": "^3.342.0",
     "@aws-sdk/client-ses": "^3.342.0",
     "@babel/cli": "^7.21.5",
