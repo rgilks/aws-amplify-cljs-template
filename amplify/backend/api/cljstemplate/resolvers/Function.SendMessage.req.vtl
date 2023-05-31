@@ -1,0 +1,18 @@
+#if($util.isNull($ctx.stash.get("sqs")))
+  #return($util.toJson($ctx.prev.result))
+#end
+{
+    "version": "2018-05-29",
+    "method": "GET",
+    "resourcePath": "$ctx.stash.sqs.path",
+    "params": {
+        "query":{
+          "Action":"SendMessage",
+          "Version":"2012-11-05",
+          "MessageBody": "$util.urlEncode($util.toJson($ctx.arguments.input))",
+          "MessageDeduplicationId": "$util.autoId()",
+          "MessageGroupId": "$util.autoId()"
+        }
+    }
+}
+

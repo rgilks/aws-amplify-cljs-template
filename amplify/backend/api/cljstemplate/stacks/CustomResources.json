@@ -28,10 +28,219 @@
   },
   "Resources": {
     "EmptyResource": {
-      "Type": "Custom::EmptyResource",
-      "Condition": "AlwaysFalse"
+        "Type": "Custom::EmptyResource",
+        "Condition": "AlwaysFalse"
+    },
+    "SQSDataSourceRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+            "RoleName": {
+                "Fn::If": [
+                    "HasEnvironmentParameter",
+                    {
+                        "Fn::Join": [
+                            "-",
+                            [
+                                "SQSDataSourceRole",
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                {
+                                    "Ref": "env"
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "Fn::Join": [
+                            "-",
+                            [
+                                "SQSDataSourceRole",
+                                {
+                                    "Ref": "AppSyncApiId"
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Effect": "Allow",
+                        "Principal": {
+                            "Service": "appsync.amazonaws.com"
+                        },
+                        "Action": "sts:AssumeRole"
+                    }
+                ]
+            },
+            "Policies": [
+                {
+                    "PolicyName": "SQSSendMessage",
+                    "PolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                            {
+                                "Effect": "Allow",
+                                "Action": [
+                                    "sqs:SendMessage"
+                                ],
+                                "Resource": [
+                                    {
+                                        "Fn::Sub": "arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:*"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "SQSHttpDataSource": {
+        "DependsOn": [
+            "SQSDataSourceRole"
+        ],
+        "Type": "AWS::AppSync::DataSource",
+        "Properties": {
+            "ApiId": {
+                "Ref": "AppSyncApiId"
+            },
+            "Name": "SQSHttpDataSource",
+            "Description": "SQS API",
+            "Type": "HTTP",
+            "ServiceRoleArn": {
+                "Fn::GetAtt": [
+                    "SQSDataSourceRole",
+                    "Arn"
+                ]
+            },
+            "HttpConfig": {
+                "Endpoint": {
+                    "Fn::Sub": "https://sqs.${AWS::Region}.amazonaws.com"
+                },
+                "AuthorizationConfig": {
+                    "AuthorizationType": "AWS_IAM",
+                    "AwsIamConfig": {
+                        "SigningRegion": {
+                            "Fn::Sub": "${AWS::Region}"
+                        },
+                        "SigningServiceName": "sqs"
+                    }
+                }
+            }
+        }
+    },
+    "SendMessageFunction": {
+        "DependsOn": [
+            "SQSHttpDataSource"
+        ],
+        "Type": "AWS::AppSync::FunctionConfiguration",
+        "Properties": {
+            "ApiId": {
+                "Ref": "AppSyncApiId"
+            },
+            "DataSourceName": "SQSHttpDataSource",
+            "FunctionVersion": "2018-05-29",
+            "Name": "SendMessageFunction",
+            "RequestMappingTemplateS3Location": {
+                "Fn::Sub": [
+                    "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.SendMessage.req.vtl",
+                    {
+                        "S3DeploymentBucket": {
+                            "Ref": "S3DeploymentBucket"
+                        },
+                        "S3DeploymentRootKey": {
+                            "Ref": "S3DeploymentRootKey"
+                        }
+                    }
+                ]
+            },
+            "ResponseMappingTemplateS3Location": {
+                "Fn::Sub": [
+                    "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.SendMessage.res.vtl",
+                    {
+                        "S3DeploymentBucket": {
+                            "Ref": "S3DeploymentBucket"
+                        },
+                        "S3DeploymentRootKey": {
+                            "Ref": "S3DeploymentRootKey"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "EnqueueEmailResolver": {
+        "DependsOn": [
+            "SendMessageFunction"
+        ],
+        "Type": "AWS::AppSync::Resolver",
+        "Properties": {
+            "ApiId": {
+                "Ref": "AppSyncApiId"
+            },
+            "TypeName": "Mutation",
+            "FieldName": "enqueueEmail",
+            "Kind": "PIPELINE",
+            "PipelineConfig": {
+                "Functions": [
+                    {
+                        "Fn::GetAtt": [
+                            "SendMessageFunction",
+                            "FunctionId"
+                        ]
+                    }
+                ]
+            },
+            "RequestMappingTemplate": {
+                "Fn::Sub": [
+                    "#set( $sqs = {\"path\":\"/${accountId}/${queueName}\"} )\n$util.qr($ctx.stash.put(\"sqs\", $sqs))\n{}",
+                    {
+                        "accountId": {
+                            "Ref": "AWS::AccountId"
+                        },
+                        "queueName": {
+                            "Fn::If": [
+                                "HasEnvironmentParameter",
+                                {
+                                    "Fn::Join": [
+                                        "-",
+                                        [
+                                            "SendEmail",
+                                            {
+                                                "Ref": "AppSyncApiId"
+                                            },
+                                            {
+                                                "Ref": "env"
+                                            },
+                                            ".fifo"
+                                        ]
+                                    ]
+                                },
+                                {
+                                    "Fn::Join": [
+                                        "-",
+                                        [
+                                            "SendEmail",
+                                            {
+                                                "Ref": "AppSyncApiId"
+                                            },
+                                            ".fifo"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "ResponseMappingTemplate": "$util.toJson($ctx.result)"
+        }
     }
-  },
+},
   "Conditions": {
     "HasEnvironmentParameter": {
       "Fn::Not": [
