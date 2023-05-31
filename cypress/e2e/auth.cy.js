@@ -51,7 +51,7 @@ describe('Create Account', () => {
     cy.get('.amplify-tabs-item').contains('Create Account').click()
   })
 
-  it.skip('A existing user cannot sign up again with the same email address', () => {
+  it('A existing user cannot sign up again with the same email address', () => {
     cy.get('input[name="username"]').type(userName)
     cy.get('input[name="password"]').type(password)
     cy.get('input[name="confirm_password"]').type(password)
@@ -60,7 +60,7 @@ describe('Create Account', () => {
     cy.get('.amplify-alert__body').contains('User already exists')
   })
 
-  it.skip('A new user can sign up', async () => {
+  it('A new user can sign up', async () => {
     const timestampedUserName = `testUser1+${Date.now()}`
 
     cy.get('input[name="username"]').type(timestampedUserName)
