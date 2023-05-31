@@ -4,6 +4,8 @@ This is a ClojureScript project template for AWS Amplify. This project is set up
 
 ## Issues
 
+- Site base issue
+
 - To get the SES template to deploy with `amplify push` I added an inline policy
 
 ```
