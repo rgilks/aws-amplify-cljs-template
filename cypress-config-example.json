@@ -1,5 +1,6 @@
 {
   "userPoolId": "USER_POOL_ID",
+  "region": "eu-west-1",
   "testUsers": {
     "testUser1": {
       "email": "TEST_USER1001@gmail.com",
