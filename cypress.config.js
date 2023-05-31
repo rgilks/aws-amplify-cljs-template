@@ -3,6 +3,9 @@ const {defineConfig} = require('cypress')
 const gmail_tester = require('gmail-tester')
 const promisePoller = require('promise-poller').default
 
+const {region, userPoolId} = JSON.parse(process.env.CYPRESS_CONFIG)
+
+AWS.config.update({region})
 const cognito = new AWS.CognitoIdentityServiceProvider()
 
 const findEmail = async (creds, token, options, subject, from) => {
@@ -51,8 +54,11 @@ async function setupNodeEvents(on, config) {
   })
 
   on('task', {
-    deleteTestUser({Username, UserPoolId}) {
-      return cognito.adminDeleteUser({Username, UserPoolId}).promise()
+    deleteTestUser(username) {
+      console.log('Deleting user:', username)
+      return cognito
+        .adminDeleteUser({Username: username, UserPoolId: userPoolId})
+        .promise()
     }
   })
 

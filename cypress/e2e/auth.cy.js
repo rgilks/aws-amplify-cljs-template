@@ -1,4 +1,6 @@
-const {testUsers, userPoolId} = Cypress.env('CONFIG')
+const cypressConfig = Cypress.env('CONFIG')
+
+const {testUsers} = cypressConfig
 
 const userName = 'testUser1'
 const {email, password} = testUsers[userName]
@@ -60,7 +62,7 @@ describe('Create Account', () => {
     cy.get('.amplify-alert__body').contains('User already exists')
   })
 
-  it('A new user can sign up', async () => {
+  it('A new user can sign up', () => {
     const timestampedUserName = `testUser1+${Date.now()}`
 
     cy.get('input[name="username"]').type(timestampedUserName)
@@ -84,9 +86,8 @@ describe('Create Account', () => {
 
     cy.findByTestId('logged-in').contains('YOU ARE LOGGED IN!')
 
-    cy.task('deleteTestUser', {
-      Username: timestampedUserName,
-      UserPoolId: userPoolId
-    })
+    cy.task('deleteTestUser', timestampedUserName)
+
+    cy.log('Test user deleted')
   })
 })
