@@ -55,9 +55,11 @@
       "service": "Cognito"
     }
   },
-  "ses": {
-    "emailTemplates": {
-      "providerPlugin": "awscloudformation"
+  "custom": {
+    "sestemplates": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "customCloudformation"
     }
   }
 }

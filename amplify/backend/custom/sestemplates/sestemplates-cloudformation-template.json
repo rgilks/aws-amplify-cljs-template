@@ -1,13 +1,13 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "AWS SES Generic Template",
+    "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.0.3\",\"stackType\":\"custom-customCloudformation\",\"metadata\":{}}",
     "Parameters": {
         "env": {
             "Type": "String"
         }
     },
     "Resources": {
-        "CepheusGenericTemplate": {
+        "CLJSTGenericTemplate": {
             "Type": "AWS::SES::Template",
             "Properties": {
                 "Template": {
@@ -15,7 +15,7 @@
                         "Fn::Join": [
                             "-",
                             [
-                                "cljst-generic",
+                                "generic",
                                 {
                                     "Ref": "env"
                                 }
