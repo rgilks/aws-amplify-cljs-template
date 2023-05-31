@@ -144,7 +144,7 @@ The provided `Dockerfile` is used to construct the build image utilized by the A
 
 `public.ecr.aws/n1r2w5d4/tre-amplify-custom-image` is available publicly, so you can just use that if you like.
 
-To build and deploy your own, create a public repository in ECR, then run the following commands replacing 
+To build and deploy your own, create a public repository in ECR, then run the following commands replacing
 `n1r2w5d4/tre-amplify-custom-image` with your own registry alias and repository name.
 
 1. Authenticate your Docker client with your registry:
@@ -245,7 +245,6 @@ Learn more about "@auth" authorization rules here: https://docs.amplify.aws/cli/
 ✅ GraphQL schema compiled successfully.
 
 ```
-
 
 ## License
 
