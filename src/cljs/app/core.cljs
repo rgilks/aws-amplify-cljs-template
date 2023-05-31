@@ -5,6 +5,7 @@
    [app.view :as view]
    [app.datastore :as datastore]
    [app.user :as user]
+   [app.routing :as routing]
    [uix.core :refer [$]]
    [uix.dom]
    [refx.alpha :as refx]))
@@ -32,7 +33,7 @@
      :games           nil}])
   (refx/dispatch-sync [::user/get])
   ;; (refx/dispatch-sync [::event/init-listeners])
-  ;; (routing/init-routes!)
+  (routing/init-routes!)
   (init-hub-listeners!
    [["datastore" "ready"  ::datastore/ready]
     ["auth"      "signIn" ::user/get]])
