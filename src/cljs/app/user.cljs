@@ -21,18 +21,18 @@
      (merge fx {:dispatch [::datastore/configure "UNKNOWN"]}))))
 
 (refx/reg-fx
- :get-user
+ ::get-user
  (fn []
    (-> (p/let [user (.currentAuthenticatedUser amplify/Auth)]
          (refx/dispatch [::update user]))
        (p/catch #(println "Get user" %)))))
 
 (refx/reg-fx
- :update-user-att
+ ::update-user-att
  (fn [[user att]]
    (.updateUserAttributes amplify/Auth user (clj->js att))))
 
 (refx/reg-event-fx
  ::get
  (fn [_ [_]]
-   {:get-user []}))
+   {::get-user []}))

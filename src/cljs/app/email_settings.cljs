@@ -3,6 +3,7 @@
    [refx.alpha :as refx]
    ["@mui/material" :as mui]
    [uix.core :refer [$ defui]]
+   [app.user :as user]
    [uix.dom]))
 
 (refx/reg-sub
@@ -12,7 +13,7 @@
 (refx/reg-event-fx
  ::update-unsubscribed
  (fn [{:keys [db]} [_ value]]
-   {:update-user-att [(:user db) {"custom:unsubscribed" (str value)}]
+   {::user/update-user-att [(:user db) {"custom:unsubscribed" (str value)}]
     :db              (assoc db :unsubscribed value)}))
 
 (defui view []

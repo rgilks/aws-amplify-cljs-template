@@ -62,7 +62,7 @@ async function setupNodeEvents(on, config) {
         Username: username,
         UserPoolId: userPoolId
       })
-      return cognito.send(command).promise()
+      return cognito.send(command)
     }
   })
 
