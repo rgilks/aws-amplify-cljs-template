@@ -95,6 +95,8 @@
     "create-react-class": "^15.7.0",
     "cypress": "^12.13.0",
     "gmail-tester": "^1.3.8",
+    "html-beautifier-webpack-plugin": "^1.0.6",
+    "html-webpack-plugin": "^5.5.1",
     "karma": "6.4.2",
     "karma-chrome-launcher": "^3.2.0",
     "karma-cljs-test": "^0.1.0",

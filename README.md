@@ -183,6 +183,22 @@ docker buildx build --platform linux/amd64 --push -t public.ecr.aws/n1r2w5d4/tre
 
 By following these instructions, you can update the Docker image in your ECR repository.
 
+## Amplify Console
+
+TODO: Automate this setup
+
+- You need to set a BASE_PATH env var for each subdomain
+
+You also need to set up the following redirects.
+
+![DataStore](/docs/amplify-redirects.png?raw=true)
+
+```
+</^(/game)[^.]+$|\.(?!(html|htm|mp3|bin|gltf|css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>
+
+</^(/email-settings)[^.]+$|\.(?!(html|htm|mp3|bin|gltf|css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>
+```
+
 # NOTES
 
 ## Setting up Amplify
