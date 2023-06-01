@@ -32,7 +32,9 @@
           (filter
            (fn [{:keys [id owner allowSpectators]}]
              (or
-              (= true allowSpectators)
+            ;;   HACK: allowSpectators is not yet implemented
+              (= true true)
+            ;;   (= true allowSpectators)
               (= owner username)
               (->> players vals
                    (some
