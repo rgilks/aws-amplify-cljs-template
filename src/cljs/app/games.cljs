@@ -132,11 +132,13 @@
                    :padding        "10px"
                    :padding-bottom "75px"}}
           ($ mui/Typography
-             {:variant "h4"
+             {:data-testid "games-title"
+              :variant "h4"
               :style   {:text-align     "center"
                         :padding-bottom "40px"}}
              "APP TITLE")
           ($ mui/Card
+             {:data-testid "games-list"}
              ($ mui/CardContent
                 {:style {:margin "5px"}}
                 ($ :div
