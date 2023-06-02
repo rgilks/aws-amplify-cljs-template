@@ -1,35 +1,14 @@
 # AWS Amplify ClojureScript Template
 
-This is a ClojureScript project template for AWS Amplify. This project is set up with AWS Amplify, Amplify UI components, React, Material UI, emotion for CSS-in-JS, and various other dependencies.
+This is a ClojureScript project template for AWS Amplify.
 
-## Issues
-
-- To get the SES template to deploy with `amplify push` I added an inline policy
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "ses:*",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-This needs to be sorted out
+By way of an example it sets up the basic functionality to start writing a multi-user realtime game.
 
 ## Features
 
 - AWS Amplify integration
-- Uses Material UI and emotion for styling
-- Code formatting with Prettier
-- Linting with clj-kondo
+- Material UI for styling
 - Testing with Karma
-- Continuous integration set up with Amplify
 
 ## Requirements
 
@@ -48,18 +27,17 @@ This project requires Node.js and npm. The required versions are:
 
 To run the project, you need to start webpack, the development server, and the Karma test runner in separate terminals.
 
-1. Start the development server:
+1. **Start the dev server:** 
 
-run `yarn watch`.
+        yarn watch
 
-1. Start webpack:
+2. **Start webpack:** In a second terminal
 
-   In a second terminal, run `yarn webpack`. Note that you might see some errors
-   initially until the build processes are complete.
+        yarn webpack
 
-2. Start the Karma test runner:
-
-   In a third terminal, run `yarn karma`.
+3. **Start the Karma test runner:** In a third terminal
+        
+        yarn karma
 
 ## Cypress Tests
 
@@ -183,9 +161,7 @@ By following these instructions, you can update the Docker image in your ECR rep
 
 ## Amplify Console
 
-TODO: Automate this setup
-
-- You need to set a BASE_PATH env var for each subdomain
+You need to set a BASE_PATH env var for each subdomain
 
 You also need to set up the following redirects.
 
