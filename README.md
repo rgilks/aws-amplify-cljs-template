@@ -27,17 +27,16 @@ This project requires Node.js and npm. The required versions are:
 
 To run the project, you need to start webpack, the development server, and the Karma test runner in separate terminals.
 
-1. **Start the dev server:** 
+1.  **Start the dev server:**
 
         yarn watch
 
-2. **Start webpack:** In a second terminal
+2.  **Start webpack:** In a second terminal
 
         yarn webpack
 
-3. **Start the Karma test runner:** In a third terminal
-        
-        yarn karma
+3.  **Start the Karma test runner:** In a third terminal
+    yarn karma
 
 ## Cypress Tests
 
