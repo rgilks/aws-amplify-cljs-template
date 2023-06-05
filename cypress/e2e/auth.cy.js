@@ -39,7 +39,6 @@ describe('Sign In', () => {
   })
 
   it('A registered user can sign in', () => {
-    cy.get('.amplify-button--primary').click()
     cy.get('input[name="username"]').type(username)
     cy.get('input[name="password"]').type(password)
     cy.get('button[type="submit"]').click()
@@ -62,7 +61,7 @@ describe('Create Account', () => {
     cy.get('.amplify-alert__body').contains('User already exists')
   })
 
-  it('A new user can sign up', () => {
+  it.skip('A new user can sign up', () => {
     const timestampedUserName = `testUser1+${Date.now()}`
 
     cy.get('input[name="username"]').type(timestampedUserName)

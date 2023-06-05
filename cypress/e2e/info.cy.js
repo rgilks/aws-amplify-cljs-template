@@ -1,8 +1,5 @@
-import as from '../support/as'
-
 describe('Info Page', () => {
-  beforeEach(async () => {
-    await as('testUser1')
+  beforeEach(() => {
     cy.visit('/info.html')
   })
 
