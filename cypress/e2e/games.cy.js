@@ -1,8 +1,17 @@
-import as from '../support/as'
+const cypressConfig = Cypress.env('CONFIG')
+
+const {testUsers} = cypressConfig
+
+const username = 'testUser1'
+const {email, password} = testUsers[username]
 
 describe('Games listing', () => {
-  beforeEach(async () => {
-    await as('testUser1')
+  beforeEach(() => {
+    cy.visit('/')
+    cy.get('input[name="username"]').type(username)
+    cy.get('input[name="password"]').type(password)
+    cy.get('button[type="submit"]').click()
+    cy.findByTestId('logged-in').contains('YOU ARE LOGGED IN!')
     cy.visit('/games')
   })
 
