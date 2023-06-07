@@ -1,16 +1,16 @@
 (ns app.games-test
   (:require
+   ["@testing-library/react" :as rtl]
+   ["models" :as models]
    [app.cofx :as cofx]
    [app.games :as games]
    [app.schema :as schema]
-   ["models" :as models]
    [app.util :as util]
    [clojure.test :refer-macros [deftest is testing use-fixtures]]
    [malli.generator :as mg]
    [refx.alpha :as refx]
    [uix.core :refer [$]]
-   [uix.dom]
-   ["@testing-library/react" :as rtl]))
+   [uix.dom]))
 
 ;; (deftest new-game
 ;;   (rf-test/run-test-sync
@@ -33,7 +33,6 @@
 ;;                :allowSpectators        false}))))
 ;;     (rf/dispatch [::event/init-db {:username "username"}])
 ;;     (rf/dispatch [::games/new-game])))
-
 
 ;; (deftest new-game-click
 ;;   (rf-test/run-test-sync
@@ -61,7 +60,6 @@
 ;;       ;; check appears in list?
 ;;       (.unmount comp))))
 
-
 ;; (deftest delete-game
 ;;   (rf-test/run-test-sync
 ;;     (rf/reg-fx
@@ -75,7 +73,6 @@
 ;;       (rf/dispatch [::games/delete "game-id"])
 ;;       (is (nil? @(rf/subscribe [::games/selected]))))))
 
-
 ;; (deftest displays-game-loader
 ;;   (rf-test/run-test-sync
 ;;     (rf/dispatch [::event/init-db {:games nil}])
@@ -83,7 +80,6 @@
 ;;           loader (.getByTestId comp "loading-games")]
 ;;       (is (some? loader))
 ;;       (.unmount comp))))
-
 
 ;; (deftest game-selected
 ;;   (rf-test/run-test-sync
@@ -96,7 +92,6 @@
 ;;         (is (= "Delete Game" title))
 ;;         (is (= "Delete the 'Game A' game and all associated data?" content))
 ;;         (.unmount comp)))))
-
 
 ;; (deftest delete-selected-game-click
 ;;   (rf-test/run-test-sync
@@ -114,14 +109,12 @@
 ;;         (is (nil? @(rf/subscribe [::games/selected])))
 ;;         (.unmount comp)))))
 
-
 ;; (deftest game-not-selected
 ;;   (rf/dispatch [::event/init-db {::games/selected nil}])
 ;;   (let [comp   (test/render ($ games/delete-modal {:name "Game"}))
 ;;         title? (-> comp (.queryAllByText "Delete Game") .-length pos?)]
 ;;     (is (false? title?))
 ;;     (.unmount comp)))
-
 
 ;; (deftest is-game-owner
 ;;   (rf-test/run-test-sync
@@ -140,7 +133,6 @@
 ;;       (is (true?
 ;;             (-> comp (.queryAllByTestId "game-link-button") .-length pos?))))))
 
-
 ;; (deftest is-not-game-owner
 ;;   (rf-test/run-test-sync
 ;;     (let [game (mg/generate schema/game)
@@ -148,7 +140,6 @@
 ;;                               {:games [game] :username "fred"}))]
 ;;       (is (false?
 ;;             (-> comp (.queryAllByTestId "game-link-button") .-length pos?))))))
-
 
 ;; (deftest spectators-allowed
 ;;   (rf-test/run-test-sync
@@ -159,7 +150,6 @@
 ;;                               {:games [game] :username "username"}))]
 ;;       (is (test/text? comp "Owner: username | Spectators welcome")))))
 
-
 ;; (deftest no-games
 ;;   (rf-test/run-test-sync
 ;;     (rf/dispatch [::event/init-db
@@ -167,7 +157,6 @@
 ;;                    :players {} :username "jimmy"}])
 ;;     (let [visible-games @(rf/subscribe [::games/visible-games])]
 ;;       (is (= [] visible-games)))))
-
 
 ;; (deftest no-games-with-spectators
 ;;   (rf-test/run-test-sync
@@ -180,7 +169,6 @@
 ;;       (let [visible-games @(rf/subscribe [::games/visible-games])]
 ;;         (is (= [] visible-games))))))
 
-
 ;; (deftest one-game-with-spectators
 ;;   (rf-test/run-test-sync
 ;;     (let [game-a (assoc (mg/generate schema/game)
@@ -191,7 +179,6 @@
 ;;                      :players {} :username "jimmy"}])
 ;;       (let [visible-games @(rf/subscribe [::games/visible-games])]
 ;;         (is (= [game-a] visible-games))))))
-
 
 ;; (deftest one-game-with-spectators-and-one-without
 ;;   (rf-test/run-test-sync

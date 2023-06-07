@@ -1,12 +1,12 @@
 (ns app.email-settings-test
   (:require
-   [app.email-settings :as comp]
-   [cljs.test :refer [deftest is]]
-   [app.user :as user]
-   [app.datastore :as datastore]
-   [uix.core :refer [$]]
    ["@testing-library/react" :as rtl]
-   [refx.alpha :as refx]))
+   [app.datastore :as datastore]
+   [app.email-settings :as comp]
+   [app.user :as user]
+   [cljs.test :refer [deftest is]]
+   [refx.alpha :as refx]
+   [uix.core :refer [$]]))
 
 (refx/reg-event-fx
  ::update-unsubscribed

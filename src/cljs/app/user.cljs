@@ -1,8 +1,8 @@
 (ns app.user
   (:require
    ["aws-amplify" :as amplify]
-   [promesa.core :as p]
    [app.datastore :as datastore]
+   [promesa.core :as p]
    [refx.alpha :as refx]))
 
 (defn is-unsubscribed? [user]

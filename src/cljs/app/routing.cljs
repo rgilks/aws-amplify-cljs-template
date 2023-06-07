@@ -1,14 +1,13 @@
 (ns app.routing
   (:require
+   [app.datastore :as datastore]
    [app.email-settings :as email-settings]
    [app.games :as games]
-   [app.datastore :as datastore]
    [refx.alpha :as refx]
    [reitit.coercion.spec :as reitit-spec]
    [reitit.frontend :as reitit]
    [reitit.frontend.controllers :as reitit-controllers]
    [reitit.frontend.easy :as reitit-easy]))
-
 
 (defn href
   "Return relative url for given route. Url can be used in HTML links."
@@ -18,7 +17,6 @@
    (href k params nil))
   ([k params query]
    (reitit-easy/href k params query)))
-
 
 (defn on-navigate [new-match]
   (when new-match
@@ -52,13 +50,10 @@
   ;;    [{:parameters {:path [:slug]}
   ;;      :start      #(refx/dispatch [::check-access-by-slug (-> % :path :slug)])}]}]
    ])
-
-
 (def router
   (reitit/router
    routes
    {:data {:coercion reitit-spec/coercion}}))
-
 
 (defn init-routes! []
   (reitit-easy/start!
@@ -66,12 +61,10 @@
    on-navigate
    {:use-fragment false}))
 
-
 (refx/reg-fx
  ::push-state-fx
  (fn [route]
    (apply reitit-easy/push-state route)))
-
 
 (refx/reg-event-fx
  ::push-state
