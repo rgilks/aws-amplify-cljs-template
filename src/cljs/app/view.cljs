@@ -1,14 +1,14 @@
 (ns app.view
   (:require
-   [app.routing :as routing]
-   [uix.core :refer [$ defui]]
-   [uix.dom]
    ["@aws-amplify/ui-react" :as amplify-ui]
-   ["react-div-100vh" :default Div100vh]
-   [refx.alpha :as refx]
-   ["@mui/material/styles" :as mui-styles]
    ["@mui/material" :as mui]
-   [app.theme :refer [theme]]))
+   ["@mui/material/styles" :as mui-styles]
+   ["react-div-100vh" :default Div100vh]
+   [app.routing :as routing]
+   [app.theme :refer [theme]]
+   [refx.alpha :as refx]
+   [uix.core :refer [$ defui]]
+   [uix.dom]))
 
 (refx/reg-sub
  ::games

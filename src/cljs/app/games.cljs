@@ -1,12 +1,12 @@
 (ns app.games
   (:require
+   ["@mui/icons-material" :as icon]
+   ["@mui/material" :as mui]
+   ["models" :as models]
    [app.cofx :as cofx]
    [clojure.string :as str]
    [refx.alpha :as refx]
    [uix.core :refer [$ defui]]
-   ["@mui/material" :as mui]
-   ["@mui/icons-material" :as icon]
-   ["models" :as models]
    [uix.dom]))
 
 (refx/reg-sub

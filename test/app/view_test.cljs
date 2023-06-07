@@ -1,13 +1,13 @@
 (ns app.view-test
   (:require
-   [cljs.test :refer [deftest is async]]
-   [app.view :as comp]
-   [app.test :as test]
-   [app.datastore :as datastore]
-   [uix.core :refer [$]]
    ["@testing-library/react" :as rtl]
+   [app.datastore :as datastore]
+   [app.test :as test]
+   [app.view :as comp]
+   [cljs.test :refer [deftest is async]]
    [promesa.core :as p]
-   [refx.alpha :as refx]))
+   [refx.alpha :as refx]
+   [uix.core :refer [$]]))
 
 (deftest games-test
   (async

@@ -1,9 +1,9 @@
 (ns app.datastore
   (:require
    ["aws-amplify" :as amplify]
-   [promesa.core :as p]
-   [app.util :as ut]
    ["models" :as models]
+   [app.util :as ut]
+   [promesa.core :as p]
    [refx.alpha :as refx]))
 
 (defn sync-expressions [game-id username]

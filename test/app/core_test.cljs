@@ -1,8 +1,8 @@
 (ns app.core-test
   (:require
-   [cljs.test :refer [deftest is]]
    ["aws-amplify" :as amplify]
    [app.core :as core]
+   [cljs.test :refer [deftest is]]
    [refx.alpha :as refx]))
 
 (deftest init-hub-listeners-test

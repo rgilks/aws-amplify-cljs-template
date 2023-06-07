@@ -1,14 +1,14 @@
 (ns app.core
   (:require
-   ["aws-exports" :default aws-exports]
    ["aws-amplify" :as amplify]
-   [app.view :as view]
+   ["aws-exports" :default aws-exports]
    [app.datastore :as datastore]
-   [app.user :as user]
    [app.routing :as routing]
+   [app.user :as user]
+   [app.view :as view]
+   [refx.alpha :as refx]
    [uix.core :refer [$]]
-   [uix.dom]
-   [refx.alpha :as refx]))
+   [uix.dom]))
 
 (defn init-hub-listeners! [hub-listeners]
   (doseq [[channel target-event re-frame-event] hub-listeners]

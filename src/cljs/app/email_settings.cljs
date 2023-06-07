@@ -1,9 +1,9 @@
 (ns app.email-settings
   (:require
-   [refx.alpha :as refx]
    ["@mui/material" :as mui]
-   [uix.core :refer [$ defui]]
    [app.user :as user]
+   [refx.alpha :as refx]
+   [uix.core :refer [$ defui]]
    [uix.dom]))
 
 (refx/reg-sub
