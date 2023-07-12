@@ -2,7 +2,8 @@
   (:require
    ["aws-amplify" :as amplify]
    ["models" :as models]
-   [app.util :as ut]
+   [app.util :as util]
+   [goog.object :as gobj]
    [promesa.core :as p]
    [refx.alpha :as refx]))
 
@@ -25,7 +26,7 @@
         opType  (.-opType msg)]
     (if (= opType "DELETE")
       (refx/dispatch [::delete-model model-key id])
-      (refx/dispatch [::update-model model-key id (ut/obj->clj element)]))))
+      (refx/dispatch [::update-model model-key id (util/obj->clj element)]))))
 
 (refx/reg-fx
  :configure
@@ -46,7 +47,7 @@
  (fn [models]
    (doseq [[key model] models]
      (p/let [result (.query amplify/DataStore model)
-             data (ut/obj->clj result)
+             data (util/obj->clj result)
              keyed-data (reduce #(assoc %1 (:id %2) %2) {} data)]
        (refx/dispatch [::update-models key keyed-data])))))
 
@@ -100,3 +101,27 @@
  (fn [[model item]]
    (.save amplify/DataStore
           (model. (clj->js item)))))
+
+(def ignore-keys
+  #{"_version" "_lastChangedAt" "_deleted" "updatedAt"})
+
+(defn in?
+  "true if coll contains elm"
+  [coll elm]
+  (some #(= elm %) coll))
+
+(refx/reg-fx
+ :update-item
+ (fn [[model item]]
+   (p/let [result (.query amplify/DataStore model (:id item))
+           clone ^js/object (.copyOf
+                             model
+                             result
+                             #(gobj/forEach
+                               item
+                               (fn [v k _]
+                                 (when (not (in? ignore-keys k))
+                                   (gobj/set % k v)))))]
+     (println "UPDATE ITEM" (util/obj->clj result))
+     (println "CLONE" clone)
+     (.save amplify/DataStore clone))))
