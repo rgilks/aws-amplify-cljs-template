@@ -30,7 +30,11 @@ const appConfig = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      process: 'process/browser'
+    },
+    fallback: {'process/browser': require.resolve('process/browser')}
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -74,7 +78,11 @@ const testConfig = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      process: 'process/browser'
+    },
+    fallback: {'process/browser': require.resolve('process/browser')}
   }
 }
 

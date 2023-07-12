@@ -9,8 +9,7 @@
    [clojure.test :refer-macros [deftest is testing use-fixtures]]
    [malli.generator :as mg]
    [refx.alpha :as refx]
-   [uix.core :refer [$]]
-   [uix.dom]))
+   [uix.core :refer [$]]))
 
 ;; (deftest new-game
 ;;   (rf-test/run-test-sync

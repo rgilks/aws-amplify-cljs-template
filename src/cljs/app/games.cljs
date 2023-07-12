@@ -6,8 +6,7 @@
    [app.cofx :as cofx]
    [clojure.string :as str]
    [refx.alpha :as refx]
-   [uix.core :refer [$ defui]]
-   [uix.dom]))
+   [uix.core :refer [$ defui]]))
 
 (refx/reg-sub
  ::games
