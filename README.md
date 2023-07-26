@@ -17,6 +17,66 @@ This project requires Node.js and npm. The required versions are:
 - Node.js: >=16.0.0
 - npm: >=8.0.0
 
+## Setting Up a New Project with AWS Amplify and CLJS Template
+
+This is a brief set of instructions to set up a new project, it assumes that you are familiar with this entire document and the structure of the template.
+
+### 1. Create New Repository from Template
+
+1. Visit the [AWS Amplify CLJS Template](https://github.com/rgilks/aws-amplify-cljs-template) on GitHub.
+2. Click on "Use this template".
+3. Fill in 'myproject' as the name for your new repository.
+4. Click on "Create repository".
+
+### 2. Connect Repository to AWS Amplify
+
+1. Navigate to your GitHub account settings.
+2. Go to Integrations > Applications > AWS Amplify > configure.
+3. Add your 'myproject' repository to the AWS Amplify application and save your changes.
+
+### 3. Rename and Setup Project Files
+
+1. Navigate to your 'myproject' directory in your terminal and execute `grep -r cljstemplate .`.
+2. Rename the `api/cljstemplate` folder to `api/myproject`.
+3. Rename the `auth/cljstemplatecc274de4` folder to `api/myprojectc274de4`.
+4. Empty the content of the `team-provider-info.json` file.
+5. Use a text editor or IDE to find and replace `cljstemplate` with `myproject` across your project, especially check the /amplify.config files. For example, in `project-config.json` change `"projectName": "cljstemplate"` to `"projectName": "myproject"`.
+6. Run `amplify init` in your terminal.
+7. When asked for the environment name, use something like `devmyprojecta`. This allows you to have multiple environments for the same project in the future, like `devmyprojectb`, `devmyprojectc`, etc.
+8. Run `amplify push` and agree to the questions asked.
+9. Run `yarn` to install project dependencies.
+10. In separate terminals, run `yarn watch`, `yarn webpack`, and `yarn karma`. Ensure all karma tests pass.
+11. Navigate to the Amplify Console in your AWS account, go to your app, click on Hosting environments, select GitHub, authorize Amplify to access your 'myproject' repository in GitHub, and connect the main branch.
+
+### 4. Update Package.json and Setup Amplify
+
+1. Change the package name in `package.json` from `aws-amplify-cljs-template` to `myproject`.
+2. Run `yarn install` to install project dependencies.
+3. Run `amplify init`.
+4. Set up the environment using a name like `devmyprojecta`.
+5. Select your default editor (e.g., Visual Studio Code) and the authentication method (e.g., AWS profile).
+6. Choose the AWS profile you wish to use.
+7. Add the backend environment to your AWS Amplify app.
+8. Run `amplify push` and answer 'Y' to all questions.
+9. Run `amplify add hosting`.
+10. Choose the 'Hosting with Amplify Console' option and select 'Continues deployment'.
+11. Connect your repository branch and choose the existing environment (e.g., `devmyproject`).
+12. Enable 'full-stack continuous deployments (CI/CD)' and use the existing service role `amplifyconsole-backend-role`.
+13. Choose the advanced build image (e.g., `public.ecr.aws/n1r2w5d4/tre-amplify-custom-image`).
+
+### 5. Create Test Users and Run Cypress
+
+1. Create test user accounts `testUser1` and `testUser2` with passwords from `cypress-config` in the secrets manager.
+2. Run `yarn cypress:run` in your terminal.
+
+### 6. Set Environment Variables
+
+1. Add `CYPRESS_CONFIG` and `BASE_PATH` environment variables in your project or server configuration.
+
+### 7. Setup Rewrites and Redirects
+
+1. Configure any necessary URL rewrites and redirects for your application, as per your project requirements.
+
 ## Initial Setup
 
 1. Install Amplify CLI: If you haven't used Amplify before, or don't have a profile set up on the AWS account you plan to use, follow the [Amplify CLI Installation Guide](https://docs.amplify.aws/cli/start/install/).
