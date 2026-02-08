@@ -41,15 +41,7 @@
 
    ["/email-settings"
     {:name :email-settings
-     :view email-settings/view}]
-
-  ;;  ["/game/:slug"
-  ;;   {:name :game
-  ;;    :view view/game-view
-  ;;    :controllers
-  ;;    [{:parameters {:path [:slug]}
-  ;;      :start      #(refx/dispatch [::check-access-by-slug (-> % :path :slug)])}]}]
-   ])
+     :view email-settings/view}]])
 (def router
   (reitit/router
    routes

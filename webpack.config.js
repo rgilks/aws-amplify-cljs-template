@@ -1,10 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlBeautifierPlugin = require('html-beautifier-webpack-plugin')
 
 const appConfig = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry: './target/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -40,8 +41,19 @@ const appConfig = {
     new webpack.ProvidePlugin({
       process: 'process/browser'
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '.',
+          globOptions: {
+            ignore: ['**/index.html.tmpl']
+          }
+        }
+      ]
+    }),
     new HtmlWebpackPlugin({
-      template: './dist/index.html.tmpl',
+      template: './public/index.html.tmpl',
       filename: 'index.html',
       templateParameters: {
         basePath: process.env.BASE_PATH ?? 'http://localhost:3000/'

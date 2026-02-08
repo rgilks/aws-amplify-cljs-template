@@ -1,21 +1,20 @@
 (ns app.user
   (:require
-   ["aws-amplify" :as amplify]
+   ["aws-amplify/auth" :refer [getCurrentUser fetchUserAttributes updateUserAttributes]]
    [app.datastore :as datastore]
    [promesa.core :as p]
    [refx.alpha :as refx]))
 
-(defn is-unsubscribed? [user]
-  (= "true" (get (js->clj (.-attributes user)) "custom:unsubscribed")))
+(defn is-unsubscribed? [attributes]
+  (= "true" (get attributes "custom:unsubscribed")))
 
 (refx/reg-event-fx
  ::update
- (fn [{:keys [db]} [_ user]]
-   (let [username (.-username user)
-         unsubscribed (is-unsubscribed? user)
+ (fn [{:keys [db]} [_ username attributes]]
+   (let [unsubscribed (is-unsubscribed? attributes)
          fx {:db (assoc db
-                        :user user
                         :username username
+                        :attributes attributes
                         :unsubscribed unsubscribed)}]
      (println "Update user" username)
      (merge fx {:dispatch [::datastore/configure "UNKNOWN"]}))))
@@ -23,14 +22,18 @@
 (refx/reg-fx
  ::get-user
  (fn []
-   (-> (p/let [user (.currentAuthenticatedUser amplify/Auth)]
-         (refx/dispatch [::update user]))
+   (-> (p/let [user (getCurrentUser)
+               username (.-username user)
+               attrs (fetchUserAttributes)
+               attributes (js->clj attrs)]
+         (refx/dispatch [::update username attributes]))
        (p/catch #(println "Get user" %)))))
 
 (refx/reg-fx
  ::update-user-att
- (fn [[user att]]
-   (.updateUserAttributes amplify/Auth user (clj->js att))))
+ (fn [[_ att]]
+   (updateUserAttributes
+    (clj->js {:userAttributes att}))))
 
 (refx/reg-event-fx
  ::get

@@ -1,26 +1,23 @@
-FROM amazonlinux:2
+FROM amazonlinux:2023
 
-ENV VERSION_NODE_DEFAULT=16
-ENV VERSION_YARN=1.22.0
-ENV VERSION_AMPLIFY=12.0.0
+ENV VERSION_NODE_DEFAULT=20
+ENV VERSION_YARN=1.22.22
+ENV VERSION_AMPLIFY=14.2.3
 
 ## Install OS packages
 RUN touch ~/.bashrc
-RUN yum -y update && \
-    yum -y install \
+RUN dnf -y update && \
+    dnf -y install \
         alsa-lib-devel \
         autoconf \
         automake \
         bzip2 \
         bison \
-        bzr \
         cmake \
         expect \
         fontconfig \
         git \
         gcc-c++ \
-        GConf2-devel \
-        gtk2-devel \
         gtk3-devel \
         libnotify-devel \
         libpng \
@@ -55,9 +52,9 @@ RUN yum -y update && \
         zip \
         zlib \
         zlib-devel \
-        java-11-amazon-corretto-headless \
-    yum clean all && \
-    rm -rf /var/cache/yum
+        java-17-amazon-corretto-headless && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
 
 ## Install Clojure
 RUN curl -O https://download.clojure.org/install/linux-install-1.11.1.1252.sh
@@ -66,10 +63,10 @@ RUN ./linux-install-1.11.1.1252.sh
 
 ## Install Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-RUN yum install -y ./google-chrome-stable_current_*.rpm
+RUN dnf install -y ./google-chrome-stable_current_*.rpm
 
 ## Install Node
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 RUN /bin/bash -c ". ~/.nvm/nvm.sh && nvm install ${VERSION_NODE_DEFAULT} && nvm use ${VERSION_NODE_DEFAULT} && chown -R root:root /root/.nvm &&  \
 	npm install -g yarn@${VERSION_YARN} && \
 	nvm alias default ${VERSION_NODE_DEFAULT} && nvm cache clear"

@@ -1,24 +1,11 @@
 (ns app.datastore
   (:require
-   ["aws-amplify" :as amplify]
+   ["aws-amplify/datastore" :refer [DataStore]]
    ["models" :as models]
    [app.util :as util]
    [goog.object :as gobj]
    [promesa.core :as p]
    [refx.alpha :as refx]))
-
-(defn sync-expressions [game-id username]
-  [;;(amplify/syncExpression models/Game
-   ;;  (fn [] (fn [^js i] (-> i .-name (.ne "New")))))
-   ])
-
-(defn configure [game-id username]
-  (p/do
-    (.configure
-     amplify/DataStore
-     (clj->js {:amplify/syncExpressions (sync-expressions game-id username)}))
-    (.stop amplify/DataStore))
-  (js/setTimeout #(.start amplify/DataStore) 1000))
 
 (defn- handle-subs [model-key ^js msg]
   (let [element (.-element msg)
@@ -33,20 +20,20 @@
  (fn [[game-id username]]
    (println "Datastore configure - username:" username " game-id:" game-id)
    (when username
-     (configure game-id username))))
+     (.start DataStore))))
 
 (refx/reg-fx
  :subscribe
  (fn [models]
    (doseq [[key model] models]
      (.subscribe
-      (.observe amplify/DataStore model) #(handle-subs key %)))))
+      (.observe DataStore model) #(handle-subs key %)))))
 
 (refx/reg-fx
  :get-items
  (fn [models]
    (doseq [[key model] models]
-     (p/let [result (.query amplify/DataStore model)
+     (p/let [result (.query DataStore model)
              data (util/obj->clj result)
              keyed-data (reduce #(assoc %1 (:id %2) %2) {} data)]
        (refx/dispatch [::update-models key keyed-data])))))
@@ -93,13 +80,13 @@
 (refx/reg-fx
  :delete-item
  (fn [[model id]]
-   (p/let [item (.query amplify/DataStore model id)]
-     (.delete amplify/DataStore item))))
+   (p/let [item (.query DataStore model id)]
+     (.delete DataStore item))))
 
 (refx/reg-fx
  :new-item
  (fn [[model item]]
-   (.save amplify/DataStore
+   (.save DataStore
           (model. (clj->js item)))))
 
 (def ignore-keys
@@ -113,7 +100,7 @@
 (refx/reg-fx
  :update-item
  (fn [[model item]]
-   (p/let [result (.query amplify/DataStore model (:id item))
+   (p/let [result (.query DataStore model (:id item))
            clone ^js/object (.copyOf
                              model
                              result
@@ -124,4 +111,4 @@
                                    (gobj/set % k v)))))]
      (println "UPDATE ITEM" (util/obj->clj result))
      (println "CLONE" clone)
-     (.save amplify/DataStore clone))))
+     (.save DataStore clone))))

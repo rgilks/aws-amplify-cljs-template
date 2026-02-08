@@ -29,6 +29,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Amplify generated config
+src/amplify/aws-exports.js
+
 # Misc
 .DS_Store
 .nrepl-port
@@ -44,7 +47,7 @@ report.html
 .jest
 .calva
 /karma/js
-/dist/js
+/dist/
 /target/
 
 # Node.js dependencies
