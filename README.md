@@ -24,18 +24,18 @@ After forking this template, replace these placeholders:
 
 | Placeholder | Location | Replace with |
 |---|---|---|
-| `{{APP_NAME}}` | `dist/index.html.tmpl`, `dist/manifest.json` | Your app name |
-| `{{APP_SHORT_NAME}}` | `dist/manifest.json` | Short app name (for PWA) |
-| `{{APP_DESCRIPTION}}` | `dist/index.html.tmpl` | App description |
+| `{{APP_NAME}}` | `public/index.html.tmpl`, `public/manifest.json` | Your app name |
+| `{{APP_SHORT_NAME}}` | `public/manifest.json` | Short app name (for PWA) |
+| `{{APP_DESCRIPTION}}` | `public/index.html.tmpl` | App description |
 | `APP TITLE` | `src/cljs/app/games.cljs` | Your app title |
 | `APP NAME` | Cypress tests (`cypress/e2e/`) | Match your `<title>` tag |
-| `APP INFO` | `dist/info.html`, Cypress tests | Your info page title |
+| `APP INFO` | `public/info.html`, Cypress tests | Your info page title |
 | `aws-amplify-cljs-template` | `package.json` | Your project name |
 | `cljstemplate` | Amplify config files | Your Amplify project name |
 
 Also:
 - Copy `src/amplify/aws-exports.js.example` to `src/amplify/aws-exports.js` and fill in your Amplify project values (or run `amplify push` to generate it)
-- Update logos in `dist/` (`favicon.ico`, `logo*.png`, `login-title.png`)
+- Update logos in `public/` (`favicon.ico`, `logo*.png`, `login-title.png`)
 
 ## Quick Start
 
@@ -125,15 +125,15 @@ See the [gmail-tester docs](https://github.com/levz0r/gmail-tester) for detailed
 ## Key Technologies
 
 ### JavaScript
-- [AWS Amplify v6](https://docs.amplify.aws/) - Auth, DataStore, UI components
-- [React 18](https://react.dev/) - UI rendering
-- [MUI 5](https://mui.com/) - Material Design components
+- [AWS Amplify v6](https://docs.amplify.aws/gen1/) - Auth, DataStore, UI components
+- [React 18](https://18.react.dev/) - UI rendering
+- [MUI 5](https://v5.mui.com/) - Material Design components
 - [Webpack 5](https://webpack.js.org/) - Module bundling
 
 ### ClojureScript
 - [Shadow-CLJS](https://shadow-cljs.github.io/docs/UsersGuide.html) - ClojureScript compiler with npm integration
-- [UIx](https://pitch-io.github.io/uix/) - Idiomatic ClojureScript interface to React
-- [refx](https://github.com/fbeyer/refx) - State management (re-frame compatible)
+- [UIx](https://github.com/pitch-io/uix) - Idiomatic ClojureScript interface to React
+- [refx](https://github.com/ferdinand-beyer/refx) - State management (re-frame compatible)
 - [Reitit](https://metosin.github.io/reitit/) - Data-driven routing
 - [Promesa](https://funcool.github.io/promesa/latest/) - Promise library
 - [Malli](https://github.com/metosin/malli) - Data-driven schemas
