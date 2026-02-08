@@ -1,6 +1,6 @@
 {
-  "short_name": "APP SHORTNAME",
-  "name": "APP NAME",
+  "short_name": "{{APP_SHORT_NAME}}",
+  "name": "{{APP_NAME}}",
   "icons": [
     {
       "src": "favicon.ico",

@@ -31,9 +31,8 @@
           (filter
            (fn [{:keys [id owner allowSpectators]}]
              (or
-            ;;   HACK: allowSpectators is not yet implemented
-              (= true true)
-            ;;   (= true allowSpectators)
+              ;; TODO: implement allowSpectators filtering
+              true
               (= owner username)
               (->> players vals
                    (some

@@ -11,14 +11,13 @@
 (refx/reg-event-fx
  ::update-unsubscribed
  (fn [{:keys [db]} [_ value]]
-   {::user/update-user-att [(:user db) {"custom:unsubscribed" (str value)}]
+   {::user/update-user-att [nil {"custom:unsubscribed" (str value)}]
     :db              (assoc db :unsubscribed value)}))
 
 (deftest email-settings-subscribe
   (refx/reg-fx
    ::user/update-user-att
-   (fn [[user att]]
-     (is (= "the-user" user))
+   (fn [[_ att]]
      (is (= {"custom:unsubscribed" "true"} att))))
 
   (refx/dispatch [::datastore/init {:unsubscribed false :user "the-user"}])
@@ -29,4 +28,3 @@
     (.click rtl/fireEvent checkbox)
     (is (true? (.-checked checkbox))))
   (rtl/cleanup))
-

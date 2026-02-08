@@ -13,7 +13,7 @@
 (refx/reg-event-fx
  ::update-unsubscribed
  (fn [{:keys [db]} [_ value]]
-   {::user/update-user-att [(:user db) {"custom:unsubscribed" (str value)}]
+   {::user/update-user-att [nil {"custom:unsubscribed" (str value)}]
     :db              (assoc db :unsubscribed value)}))
 
 (defui view []

@@ -1,15 +1,15 @@
 <html lang="en-GB">
   <head>
     <meta charset="utf-8" />
-    <base href="http://localhost:3000/">
+    <base href="<%= basePath %>">
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="APP DESCRIPTION" />
+    <meta name="description" content="{{APP_DESCRIPTION}}" />
     <link rel="apple-touch-icon" href="logo192.png" />
     <link rel="manifest" href="manifest.json" />
-    <title>APP NAME</title>
+    <title>{{APP_NAME}}</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Inter:slnt,wght@-10..0,100..900&display=swap" />
@@ -107,7 +107,6 @@
         color: var(--amplify-primary-color);
       }
     </style>
-    <script defer src="js/libs/bundle.js"></script>
   </head>
   <body>
     <div id="app"></div>
