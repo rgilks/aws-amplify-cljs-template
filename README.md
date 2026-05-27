@@ -218,6 +218,9 @@ These files and folders are generated locally and should not be committed:
 - `karma/js/`
 - `node_modules/`
 - `src/amplify/aws-exports.js`
+- `amplify/#current-cloud-backend/`
+- `amplify/.config/local-*`
+- `amplify/backend/amplify-meta.json`
 - `cypress-config.json`
 - Cypress screenshots and videos
 

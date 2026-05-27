@@ -3,7 +3,7 @@
 
 # Usage: ./deploy-lambda-fn.sh <function-name> <env> <profile>
 
-# e.g. ./deploy-lambda-fn.sh inviteUsers dev tre
+# e.g. ./deploy-lambda-fn.sh inviteUsers devmyprojecta default
 
 cd ../amplify/backend/function/$1/src || exit
 rm ../index.zip

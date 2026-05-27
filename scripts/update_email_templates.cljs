@@ -12,6 +12,11 @@
   (new SESClient
        #js {:apiVersion "2010-12-01" :region "eu-west-1"}))
 
+(def template-env
+  (or (first *command-line-args*)
+      (.. js/process -env -AMPLIFY_ENV)
+      "dev"))
+
 (defn ses-send [command]
   (p/let [response (.send ses-client command)
           status   (get-in response ["$metadata" "httpStatusCode"])]
@@ -38,8 +43,8 @@
 
 (ses-send
  (update-email-template
-  {:init true :subject "{{title}}" :name "generic" :env "dev"}))
+  {:init true :subject "{{title}}" :name "generic" :env template-env}))
 
 ;; (ses-send
 ;;  (new DeleteTemplateCommand
-;;       (clj->js {:TemplateName (str "generic-dev")})))
+;;       (clj->js {:TemplateName (str "generic-" template-env)})))
