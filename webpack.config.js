@@ -33,6 +33,7 @@ const appConfig = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      'js-cookie$': path.resolve(__dirname, 'src/js-cookie-compat.js'),
       process: 'process/browser'
     },
     fallback: {'process/browser': require.resolve('process/browser')}
@@ -92,6 +93,7 @@ const testConfig = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      'js-cookie$': path.resolve(__dirname, 'src/js-cookie-compat.js'),
       process: 'process/browser'
     },
     fallback: {'process/browser': require.resolve('process/browser')}

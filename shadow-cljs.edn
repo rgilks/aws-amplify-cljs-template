@@ -1,8 +1,8 @@
 {:nrepl        {:port 8775}
  :source-paths ["src/cljs" "test"]
- :dependencies [[metosin/reitit "0.10.0"]
-                [metosin/malli "0.20.0"]
-                [com.velisco/strgen "0.2.4"]
+ :dependencies [[metosin/reitit "0.10.1"]
+                [metosin/malli "0.20.1"]
+                [com.velisco/strgen "0.2.5"]
                 [funcool/promesa "11.0.678"]
                 [com.pitch/uix.core "1.4.9"]
                 [com.pitch/uix.dom "1.4.9"]
