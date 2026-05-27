@@ -4,18 +4,34 @@ This is a ClojureScript project template for AWS Amplify.
 
 By way of an example it sets up the basic functionality to start writing a multi-user realtime game.
 
+## Current Status
+
+This template targets the classic Amplify CLI / DataStore stack: Amplify JS v5,
+Amplify UI React v5, React 18, MUI 5, Shadow CLJS, Karma, and Cypress.
+
+It has been refreshed to current patch/minor versions within that architecture.
+The larger migrations to Amplify JS v6, Amplify Gen 2, React 19, MUI 6+, Shadow
+CLJS 3, and Cypress 15 are intentionally left as explicit project migrations
+rather than hidden template updates.
+
 ## Features
 
-- AWS Amplify integration
-- Material UI for styling
-- Testing with Karma
+- AWS Amplify Auth, AppSync, and DataStore integration
+- Amplify Studio generated model/form files
+- MUI 5 for styling
+- Shadow CLJS development and release builds
+- Karma unit tests and Cypress end-to-end tests
 
 ## Requirements
 
-This project requires Node.js and npm. The required versions are:
+This project requires Node.js, npm, Yarn, Clojure CLI, and the Amplify CLI. The
+tested baseline is:
 
-- Node.js: >=16.0.0
-- npm: >=8.0.0
+- Node.js: >=22.0.0
+- npm: >=10.0.0
+- Yarn: 1.22.x
+- Clojure CLI: 1.12.x
+- Amplify CLI: install separately with the official AWS instructions
 
 ## Setting Up a New Project with AWS Amplify and CLJS Template
 
@@ -38,13 +54,13 @@ This is a brief set of instructions to set up a new project, it assumes that you
 
 1. Navigate to your 'myproject' directory in your terminal and execute `grep -r cljstemplate .`.
 2. Rename the `api/cljstemplate` folder to `api/myproject`.
-3. Rename the `auth/cljstemplatecc274de4` folder to `api/myprojectc274de4`.
-4. Empty the content of the `team-provider-info.json` file.
+3. Rename the `auth/cljstemplatecc274de4` folder to `auth/myprojectcc274de4`.
+4. Keep `amplify/team-provider-info.json` empty until `amplify init` writes your own environment details.
 5. Use a text editor or IDE to find and replace `cljstemplate` with `myproject` across your project, especially check the /amplify.config files. For example, in `project-config.json` change `"projectName": "cljstemplate"` to `"projectName": "myproject"`.
 6. Run `amplify init` in your terminal.
 7. When asked for the environment name, use something like `devmyprojecta`. This allows you to have multiple environments for the same project in the future, like `devmyprojectb`, `devmyprojectc`, etc.
 8. Run `amplify push` and agree to the questions asked.
-9. Run `yarn` to install project dependencies.
+9. Run `yarn install` to install project dependencies.
 10. In separate terminals, run `yarn watch`, `yarn webpack`, and `yarn karma`. Ensure all karma tests pass.
 11. Navigate to the Amplify Console in your AWS account, go to your app, click on Hosting environments, select GitHub, authorize Amplify to access your 'myproject' repository in GitHub, and connect the main branch.
 
@@ -59,7 +75,7 @@ This is a brief set of instructions to set up a new project, it assumes that you
 7. Add the backend environment to your AWS Amplify app.
 8. Run `amplify push` and answer 'Y' to all questions.
 9. Run `amplify add hosting`.
-10. Choose the 'Hosting with Amplify Console' option and select 'Continues deployment'.
+10. Choose the 'Hosting with Amplify Console' option and select 'Continuous deployment'.
 11. Connect your repository branch and choose the existing environment (e.g., `devmyproject`).
 12. Enable 'full-stack continuous deployments (CI/CD)' and use the existing service role `amplifyconsole-backend-role`.
 13. Choose the advanced build image (e.g., `public.ecr.aws/n1r2w5d4/tre-amplify-custom-image`).
@@ -96,7 +112,12 @@ To run the project, you need to start webpack, the development server, and the K
         yarn webpack
 
 3.  **Start the Karma test runner:** In a third terminal
-    yarn karma
+
+        yarn karma
+
+For a single release-and-test pass, run:
+
+    yarn ci
 
 ## Cypress Tests
 
@@ -134,10 +155,10 @@ node node_modules/gmail-tester/init.js credentials.json token.json TEST_EMAIL_AD
 
 Now we want to store this information in AWS Secrets Manager
 
-1. Got to `https://eu-west-1.console.aws.amazon.com/secretsmanager/listsecrets`
+1. Go to `https://eu-west-1.console.aws.amazon.com/secretsmanager/listsecrets`
 2. Click `Store a new secret`
 3. Select `other type of secret`
-4. Click plain test and copy the contents of your `cypress-config.json` file there
+4. Click plain text and copy the contents of your `cypress-config.json` file there
 5. Use the `aws/secretsmanager` encryption key
 6. Click `Next`
 7. The Secret name is `cypress/config`
@@ -159,17 +180,15 @@ The project uses AWS Amplify DataStore for managing application data.
 
 ![DataStore](/docs/datastore.webp?raw=true)
 
-# JavaScript Technologies
+## JavaScript Technologies
 
 This project primarily relies on several JavaScript technologies and libraries. The key dependencies are:
 
-- [AWS Amplify](https://aws.amazon.com/amplify/): A set of tools and services that enables developers to build scalable and secure cloud applications. The project uses `@aws-amplify/auth` for authentication, `@aws-amplify/datastore` for data storage and synchronization, and `@aws-amplify/ui-react` for user interface components.
+- [AWS Amplify](https://aws.amazon.com/amplify/): A set of tools and services that enables developers to build scalable and secure cloud applications. The project uses Amplify JS v5, `@aws-amplify/auth` for authentication, `@aws-amplify/datastore` for data storage and synchronization, and `@aws-amplify/ui-react` for user interface components.
 
 - [React](https://reactjs.org/): A JavaScript library for building user interfaces. The project also uses `react-dom` for DOM-specific methods and `react-test-renderer` for testing.
 
-- [Material-UI](https://mui.com/): A popular React UI framework. The project uses `@material-ui/core` and `@mui/material` for core components, `@material-ui/icons` and `@mui/icons-material` for icons, `@mui/lab` for advanced UI components, `@mui/styles` for styling, and `@mui/system` for utility functions.
-
-- [React JSON Schema Form (rjsf)](https://github.com/rjsf-team/react-jsonschema-form): A React component for building Web forms from JSON Schema. The project uses `@rjsf/core`, `@rjsf/mui`, `@rjsf/utils`, and `@rjsf/validator-ajv6`.
+- [MUI](https://mui.com/): A React UI framework. The project uses `@mui/material` for components and `@mui/icons-material` for icons.
 
 - [Howler.js](https://howlerjs.com/): An audio library for the modern web.
 
@@ -177,7 +196,7 @@ This project primarily relies on several JavaScript technologies and libraries. 
 
 - [Webpack](https://webpack.js.org/): A module bundler for modern JavaScript applications.
 
-# ClojureScript Technologies
+## ClojureScript Technologies
 
 The project also uses several ClojureScript libraries:
 
@@ -232,11 +251,11 @@ You also need to set up the following redirects.
 </^(/email-settings)[^.]+$|\.(?!(html|htm|mp3|bin|gltf|css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>
 ```
 
-# NOTES
+## Notes
 
 ## Setting up Amplify
 
-If you have never used Amplify before on the AWS accoutn you wish to use and
+If you have never used Amplify before on the AWS account you wish to use and
 do not have profile set up, follow:
 
 https://docs.amplify.aws/cli/start/install/
