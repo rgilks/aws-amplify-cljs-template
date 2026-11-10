@@ -54,6 +54,15 @@ test('Cypress uses the supported archive reader instead of extract-zip', () => {
   })
 })
 
+test('Shadow CLJS uses its supported compiler without obsolete browser crypto shims', () => {
+  assert.ok(
+    semver.satisfies(require('shadow-cljs/package.json').version, '>=3.5.13 <4')
+  )
+  for (const name of ['elliptic', 'node-libs-browser']) {
+    assert.throws(() => require.resolve(name), {code: 'MODULE_NOT_FOUND'})
+  }
+})
+
 test('legacy integration config loads and registers tasks without invoking cloud services', () => {
   const child = spawnSync(
     process.execPath,
@@ -66,10 +75,15 @@ test('legacy integration config loads and registers tasks without invoking cloud
     const result = config.e2e.setupNodeEvents((event, values) => {
       assert.equal(event, 'task')
       Object.assign(tasks, values)
-    }, {})
+    }, {env: {CONFIG: {private: 'fixture-private-marker'}}})
     assert.equal(typeof tasks.getEmailMessages, 'function')
     assert.equal(typeof tasks.deleteTestUser, 'function')
-    Promise.resolve(result).then(value => assert.deepEqual(value, {}))
+    assert.throws(() => tasks.getEmailMessages({username: 'unknown'}), /Unknown test-account alias/)
+    Promise.resolve(result).then(value => {
+      assert.equal(value.env.CONFIG, undefined)
+      assert.deepEqual(value.env['testUser:fixture'], {email: 'fixture-address', password: 'fixture-password'})
+      assert.ok(!JSON.stringify(value.env).includes('fixture-private-marker'))
+    })
   `
     ],
     {
@@ -79,7 +93,15 @@ test('legacy integration config loads and registers tasks without invoking cloud
         PATH: process.env.PATH,
         CYPRESS_CONFIG: JSON.stringify({
           region: 'us-east-1',
-          userPoolId: 'offline-fixture'
+          userPoolId: 'offline-fixture',
+          testUsers: {
+            fixture: {
+              email: 'fixture-address',
+              password: 'fixture-password',
+              creds: {private: 'fixture-private-marker'},
+              token: {private: 'fixture-private-marker'}
+            }
+          }
         })
       }
     }

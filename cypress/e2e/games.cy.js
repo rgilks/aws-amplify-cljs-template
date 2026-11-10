@@ -2,8 +2,8 @@ const username = 'testUser1'
 let password
 
 before(() => {
-  cy.env(['CONFIG']).then(({CONFIG}) => {
-    password = CONFIG.testUsers[username].password
+  cy.env([`testUser:${username}`]).then(values => {
+    password = values[`testUser:${username}`].password
   })
 })
 

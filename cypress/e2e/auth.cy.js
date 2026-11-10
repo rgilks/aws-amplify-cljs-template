@@ -1,12 +1,10 @@
 const username = 'testUser1'
-let testUsers
 let email
 let password
 
 before(() => {
-  cy.env(['CONFIG']).then(({CONFIG}) => {
-    testUsers = CONFIG.testUsers
-    ;({email, password} = testUsers[username])
+  cy.env([`testUser:${username}`]).then(values => {
+    ;({email, password} = values[`testUser:${username}`])
   })
 })
 
@@ -78,7 +76,7 @@ describe('Create Account', () => {
     cy.get('.amplify-heading').contains('We Emailed You')
 
     cy.task('getEmailMessages', {
-      user: testUsers[username],
+      username,
       from: 'no-reply@verificationemail.com',
       subject: 'Your verification code',
       options: {include_body: true}

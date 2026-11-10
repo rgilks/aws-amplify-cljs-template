@@ -101,7 +101,7 @@
     "prettier": "^3.8.3",
     "promise-poller": "^1.9.1",
     "react-test-renderer": "^18.3.1",
-    "shadow-cljs": "2.28.23",
+    "shadow-cljs": "3.5.13",
     "start-server-and-test": "^2.1.5",
     "webpack": "^5.107.2",
     "webpack-cli": "^5.1.4"

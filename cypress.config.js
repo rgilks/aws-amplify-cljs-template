@@ -6,14 +6,16 @@ const {defineConfig} = require('cypress')
 const gmail_tester = require('gmail-tester')
 const promisePoller = require('promise-poller').default
 
-const {region, userPoolId} = JSON.parse(process.env.CYPRESS_CONFIG)
+const {
+  region,
+  userPoolId,
+  testUsers = {}
+} = JSON.parse(process.env.CYPRESS_CONFIG)
 
 const cognito = new CognitoIdentityProviderClient({region})
 
 const findEmail = async (creds, token, options, subject, from) => {
-  const failureMessage = from
-    ? `Waiting for email from: ${from}, subject: ${subject}`
-    : `Waiting for email with subject: ${subject}`
+  const failureMessage = 'Waiting for the requested verification email'
 
   const messages = await gmail_tester.get_messages(creds, token, options)
 
@@ -35,7 +37,9 @@ const findEmail = async (creds, token, options, subject, from) => {
 
 async function setupNodeEvents(on, config) {
   on('task', {
-    getEmailMessages({options, subject, user, from}) {
+    getEmailMessages({options, subject, username, from}) {
+      const user = testUsers[username]
+      if (!user) throw Error('Unknown test-account alias')
       const {creds, token} = user
 
       const date = new Date()
@@ -57,7 +61,7 @@ async function setupNodeEvents(on, config) {
 
   on('task', {
     deleteTestUser(username) {
-      console.log('Deleting user:', username)
+      console.log('Deleting the requested test account')
       const command = new AdminDeleteUserCommand({
         Username: username,
         UserPoolId: userPoolId
@@ -66,6 +70,11 @@ async function setupNodeEvents(on, config) {
     }
   })
 
+  config.env = {...config.env}
+  delete config.env.CONFIG
+  for (const [alias, {email, password}] of Object.entries(testUsers)) {
+    config.env[`testUser:${alias}`] = {email, password}
+  }
   return config
 }
 

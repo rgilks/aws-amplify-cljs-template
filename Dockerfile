@@ -53,7 +53,7 @@ RUN dnf -y update && \
         zip \
         zlib \
         zlib-devel \
-        java-17-amazon-corretto-headless && \
+        java-21-amazon-corretto-headless && \
     dnf clean all && \
     rm -rf /var/cache/dnf
 

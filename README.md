@@ -4,9 +4,9 @@ A ClojureScript single-page app template for real-time, multi-user applications 
 
 ## Current Status
 
-This template uses the Amplify Gen 1 / classic Amplify CLI stack with Amplify JS v6, Amplify UI React v6, React 18, MUI 5, Shadow CLJS, Karma, and Cypress 16.
+This template uses the Amplify Gen 1 / classic Amplify CLI stack with Amplify JS v6, Amplify UI React v6, React 18, MUI 5, Shadow CLJS 3, Karma, and Cypress 16.
 
-Amplify Gen 2, React 19, MUI 6+ and Shadow CLJS 3 require separate project migrations.
+Amplify Gen 2, React 19 and MUI 6+ require separate project migrations.
 
 ## Architecture
 
@@ -22,7 +22,7 @@ This keeps ClojureScript hot reload fast while still allowing normal npm package
 
 - Node.js 22 LTS. Use `nvm use` with the included `.nvmrc`.
 - Yarn 1.22.x.
-- Java 17+ for Shadow CLJS and the ClojureScript compiler.
+- Java 21+ for Shadow CLJS and the ClojureScript compiler. `mise exec --` selects the repository's Node 22 and Temurin 21 toolchain.
 - Clojure CLI.
 - Amplify CLI, installed and configured with AWS credentials. See the official [Amplify CLI setup guide](https://docs.amplify.aws/gen1/javascript/tools/cli/start/set-up-cli/).
 
@@ -161,7 +161,7 @@ For local runs, store the JSON in AWS Secrets Manager as `cypress/config`. The `
 
 For Amplify Console test runs, add the same JSON value as the `CYPRESS_CONFIG` environment variable.
 
-Specs request credentials asynchronously through `cy.env(['CONFIG'])`. Keep secret values out of assertions, logs and public `Cypress.expose()` configuration.
+Specs request only their test account's email and password asynchronously through `cy.env(['testUser:testUser1'])`. Gmail OAuth credentials remain in the Node task process; email tasks receive a test-account alias rather than credentials. Keep secret values out of assertions, logs and public `Cypress.expose()` configuration.
 
 The test users expected by the current specs are:
 
@@ -178,7 +178,7 @@ The project uses AWS Amplify DataStore for application data.
 
 ## Amplify Build Image
 
-The `Dockerfile` builds an Amplify Console image with Amazon Linux 2023, Node 22, Java 17, Yarn, Chrome, Cypress 16, Clojure CLI, and the Amplify CLI. Its stable Node path also works in non-interactive build shells. The Docker context contains only the recipe, not local configuration or credentials.
+The `Dockerfile` builds an Amplify Console image with Amazon Linux 2023, Node 22, Java 21, Yarn, Chrome, Cypress 16, Clojure CLI, and the Amplify CLI. Its stable Node path also works in non-interactive build shells. The Docker context contains only the recipe, not local configuration or credentials. CI builds it and verifies those tools in a non-interactive container.
 
 The public image location is:
 
@@ -242,7 +242,7 @@ These files and folders are generated locally and should not be committed:
 
 ## Troubleshooting
 
-**Shadow CLJS will not start**: Check Java with `java -version`; Java 17 or newer is required.
+**Shadow CLJS will not start**: Check Java with `java -version`; Java 21 or newer is required.
 
 **Webpack cannot resolve `aws-exports`**: Create a local config with `cp src/amplify/aws-exports.js.example src/amplify/aws-exports.js`, or run `amplify push` after `amplify init`.
 
