@@ -34,6 +34,7 @@
     "dev": "concurrently 'yarn watch' 'yarn webpack'",
     "watch": "shadow-cljs watch app karma-test",
     "ci": "NODE_ENV=production shadow-cljs release app && shadow-cljs compile karma-test && NODE_ENV=production webpack && karma start --single-run --reporters junit,dots",
+    "test:dependencies": "node --test test/dependency-security.test.cjs",
     "karma": "karma start",
     "build": "NODE_ENV=production shadow-cljs release app",
     "build-verbose": "shadow-cljs release --verbose app",
@@ -58,13 +59,15 @@
     ]
   },
   "resolutions": {
-    "axios": "^1.16.1",
+    "axios": "^1.20.0",
     "cross-spawn": "^7.0.6",
     "lodash": "^4.18.1",
-    "qs": "^6.15.2",
-    "serialize-javascript": "^7.0.5",
+    "qs": "^6.16.1",
+    "serialize-javascript": "^7.1.4",
+    "shell-quote": "^1.9.0",
+    "**/socket.io-adapter/ws": "^8.21.0",
     "uuid": "^11.1.1",
-    "**/@types/node-fetch/form-data": "^3.0.4",
+    "**/@types/node-fetch/form-data": "^3.0.5",
     "**/amazon-cognito-identity-js/js-cookie": "^3.0.7"
   },
   "devDependencies": {

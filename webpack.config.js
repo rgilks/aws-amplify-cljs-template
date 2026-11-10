@@ -3,6 +3,10 @@ const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlBeautifierPlugin = require('html-beautifier-webpack-plugin')
+const amplifyConfig =
+  process.env.TEMPLATE_OFFLINE_TEST === '1'
+    ? path.resolve(__dirname, 'src/amplify/aws-exports.js.example')
+    : '../src/amplify/aws-exports.js'
 
 const appConfig = {
   mode: process.env.NODE_ENV || 'development',
@@ -23,7 +27,7 @@ const appConfig = {
           fullySpecified: false,
           alias: {
             models: '../src/amplify/models/index.js',
-            'aws-exports': '../src/amplify/aws-exports.js',
+            'aws-exports': amplifyConfig,
             js: '../src/js'
           }
         }
@@ -83,7 +87,7 @@ const testConfig = {
           fullySpecified: false,
           alias: {
             models: '../src/amplify/models/index.js',
-            'aws-exports': '../src/amplify/aws-exports.js',
+            'aws-exports': amplifyConfig,
             js: '../src/js'
           }
         }
