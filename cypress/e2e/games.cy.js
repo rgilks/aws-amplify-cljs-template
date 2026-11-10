@@ -1,15 +1,17 @@
-const cypressConfig = Cypress.env('CONFIG')
-
-const {testUsers} = cypressConfig
-
 const username = 'testUser1'
-const {email, password} = testUsers[username]
+let password
+
+before(() => {
+  cy.env(['CONFIG']).then(({CONFIG}) => {
+    password = CONFIG.testUsers[username].password
+  })
+})
 
 describe('Games listing', () => {
   beforeEach(() => {
     cy.visit('/')
     cy.get('input[name="username"]').type(username)
-    cy.get('input[name="password"]').type(password)
+    cy.get('input[name="password"]').type(password, {log: false})
     cy.get('button[type="submit"]').click()
     cy.findByTestId('logged-in').contains('YOU ARE LOGGED IN!')
     cy.visit('/games')

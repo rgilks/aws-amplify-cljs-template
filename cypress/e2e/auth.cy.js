@@ -1,9 +1,14 @@
-const cypressConfig = Cypress.env('CONFIG')
-
-const {testUsers} = cypressConfig
-
 const username = 'testUser1'
-const {email, password} = testUsers[username]
+let testUsers
+let email
+let password
+
+before(() => {
+  cy.env(['CONFIG']).then(({CONFIG}) => {
+    testUsers = CONFIG.testUsers
+    ;({email, password} = testUsers[username])
+  })
+})
 
 describe('Login Screen', () => {
   beforeEach(() => {
@@ -40,7 +45,7 @@ describe('Sign In', () => {
 
   it('A registered user can sign in', () => {
     cy.get('input[name="username"]').type(username)
-    cy.get('input[name="password"]').type(password)
+    cy.get('input[name="password"]').type(password, {log: false})
     cy.get('button[type="submit"]').click()
     cy.findByTestId('logged-in').contains('YOU ARE LOGGED IN!')
   })
@@ -54,9 +59,9 @@ describe('Create Account', () => {
 
   it('A existing user cannot sign up again with the same email address', () => {
     cy.get('input[name="username"]').type(username)
-    cy.get('input[name="password"]').type(password)
-    cy.get('input[name="confirm_password"]').type(password)
-    cy.get('input[name="email"]').type(email)
+    cy.get('input[name="password"]').type(password, {log: false})
+    cy.get('input[name="confirm_password"]').type(password, {log: false})
+    cy.get('input[name="email"]').type(email, {log: false})
     cy.get('button[type="submit"]').click()
     cy.get('.amplify-alert__body').contains('User already exists')
   })
@@ -65,9 +70,9 @@ describe('Create Account', () => {
     const timestampedUserName = `testUser1+${Date.now()}`
 
     cy.get('input[name="username"]').type(timestampedUserName)
-    cy.get('input[name="password"]').type(password)
-    cy.get('input[name="confirm_password"]').type(password)
-    cy.get('input[name="email"]').type(email)
+    cy.get('input[name="password"]').type(password, {log: false})
+    cy.get('input[name="confirm_password"]').type(password, {log: false})
+    cy.get('input[name="email"]').type(email, {log: false})
     cy.get('button[type="submit"]').click()
 
     cy.get('.amplify-heading').contains('We Emailed You')

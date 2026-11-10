@@ -4,9 +4,9 @@ A ClojureScript single-page app template for real-time, multi-user applications 
 
 ## Current Status
 
-This template uses the Amplify Gen 1 / classic Amplify CLI stack with Amplify JS v6, Amplify UI React v6, React 18, MUI 5, Shadow CLJS, Karma, and Cypress.
+This template uses the Amplify Gen 1 / classic Amplify CLI stack with Amplify JS v6, Amplify UI React v6, React 18, MUI 5, Shadow CLJS, Karma, and Cypress 16.
 
-The dependencies have been refreshed within that architecture. Bigger moves, such as Amplify Gen 2, React 19, MUI 6+, Shadow CLJS 3, or Cypress 15, should be treated as deliberate project migrations.
+Amplify Gen 2, React 19, MUI 6+ and Shadow CLJS 3 require separate project migrations.
 
 ## Architecture
 
@@ -20,7 +20,7 @@ This keeps ClojureScript hot reload fast while still allowing normal npm package
 
 ## Requirements
 
-- Node.js >= 20.0.0. Use `nvm use` with the included `.nvmrc`.
+- Node.js 22 LTS. Use `nvm use` with the included `.nvmrc`.
 - Yarn 1.22.x.
 - Java 17+ for Shadow CLJS and the ClojureScript compiler.
 - Clojure CLI.
@@ -59,20 +59,32 @@ For a full release-and-test pass:
 yarn ci
 ```
 
+For credential-free verification, use the checked-in placeholder configuration and a root-relative asset path:
+
+```bash
+TEMPLATE_OFFLINE_TEST=1 BASE_PATH=/ yarn ci
+TEMPLATE_OFFLINE_TEST=1 yarn test:dependencies
+npx cypress install
+TEMPLATE_OFFLINE_TEST=1 yarn test:cypress:offline
+```
+
+The offline Cypress configuration serves only the built `dist/` directory on loopback, blocks external browser requests and registers no cloud tasks. It tests the sign-in controls without creating accounts, reading email or changing backend data. The credentialed integration suite remains separate.
+
 ## Available Scripts
 
-| Script             | Description                                              |
-| ------------------ | -------------------------------------------------------- |
-| `yarn dev`         | Start Shadow CLJS and Webpack concurrently               |
-| `yarn watch`       | Start Shadow CLJS dev server on port 3000                |
-| `yarn webpack`     | Start Webpack in watch mode                              |
-| `yarn karma`       | Start Karma test runner                                  |
-| `yarn build`       | Production Shadow CLJS release build                     |
-| `yarn ci`          | Full CI pipeline: release build, bundle, and Karma tests |
-| `yarn lint`        | Run clj-kondo                                            |
-| `yarn format`      | Format code with cljfmt and Prettier, then lint          |
-| `yarn cypress`     | Open Cypress test runner                                 |
-| `yarn cypress:run` | Run Cypress tests headless                               |
+| Script                      | Description                                                  |
+| --------------------------- | ------------------------------------------------------------ |
+| `yarn dev`                  | Start Shadow CLJS and Webpack concurrently                   |
+| `yarn watch`                | Start Shadow CLJS dev server on port 3000                    |
+| `yarn webpack`              | Start Webpack in watch mode                                  |
+| `yarn karma`                | Start Karma test runner                                      |
+| `yarn build`                | Production Shadow CLJS release build                         |
+| `yarn ci`                   | Full CI pipeline: release build, bundle, and Karma tests     |
+| `yarn lint`                 | Run clj-kondo                                                |
+| `yarn format`               | Format code with cljfmt and Prettier, then lint              |
+| `yarn cypress`              | Open Cypress test runner                                     |
+| `yarn cypress:run`          | Run Cypress tests headless                                   |
+| `yarn test:cypress:offline` | Run the credential-free browser suite after an offline build |
 
 ## Creating a Project from This Template
 
@@ -149,6 +161,8 @@ For local runs, store the JSON in AWS Secrets Manager as `cypress/config`. The `
 
 For Amplify Console test runs, add the same JSON value as the `CYPRESS_CONFIG` environment variable.
 
+Specs request credentials asynchronously through `cy.env(['CONFIG'])`. Keep secret values out of assertions, logs and public `Cypress.expose()` configuration.
+
 The test users expected by the current specs are:
 
 - `testUser1`
@@ -164,13 +178,15 @@ The project uses AWS Amplify DataStore for application data.
 
 ## Amplify Build Image
 
-The `Dockerfile` builds an Amplify Console image with Amazon Linux 2023, Node 20, Java 17, Yarn, Chrome, Cypress, Clojure CLI, and the Amplify CLI.
+The `Dockerfile` builds an Amplify Console image with Amazon Linux 2023, Node 22, Java 17, Yarn, Chrome, Cypress 16, Clojure CLI, and the Amplify CLI. Its stable Node path also works in non-interactive build shells. The Docker context contains only the recipe, not local configuration or credentials.
 
-The public image is:
+The public image location is:
 
 ```text
 public.ecr.aws/n1r2w5d4/tre-amplify-custom-image
 ```
+
+Repository verification does not publish a registry image. Build and validate an image with the required runtime versions before selecting it in Amplify Console.
 
 To build and push your own image:
 

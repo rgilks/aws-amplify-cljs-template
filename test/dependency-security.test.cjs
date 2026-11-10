@@ -39,6 +39,59 @@ test('patched shell quoting preserves ordinary argument data', () => {
   assert.deepEqual(quote.parse(quote.quote(args), {}), args)
 })
 
+test('Cypress uses the supported archive reader instead of extract-zip', () => {
+  assert.ok(
+    semver.satisfies(require('cypress/package.json').version, '>=16.2.1 <17')
+  )
+  assert.ok(
+    semver.satisfies(
+      from('cypress', 'yauzl/package.json').version,
+      '>=3.3.1 <4'
+    )
+  )
+  assert.throws(() => require.resolve('extract-zip'), {
+    code: 'MODULE_NOT_FOUND'
+  })
+})
+
+test('legacy integration config loads and registers tasks without invoking cloud services', () => {
+  const child = spawnSync(
+    process.execPath,
+    [
+      '-e',
+      `
+    const assert = require('node:assert/strict')
+    const config = require('./cypress.config')
+    const tasks = {}
+    const result = config.e2e.setupNodeEvents((event, values) => {
+      assert.equal(event, 'task')
+      Object.assign(tasks, values)
+    }, {})
+    assert.equal(typeof tasks.getEmailMessages, 'function')
+    assert.equal(typeof tasks.deleteTestUser, 'function')
+    Promise.resolve(result).then(value => assert.deepEqual(value, {}))
+  `
+    ],
+    {
+      encoding: 'utf8',
+      timeout: 10000,
+      env: {
+        PATH: process.env.PATH,
+        CYPRESS_CONFIG: JSON.stringify({
+          region: 'us-east-1',
+          userPoolId: 'offline-fixture'
+        })
+      }
+    }
+  )
+  assert.equal(child.status, 0, child.stderr)
+  for (const file of ['auth.cy.js', 'games.cy.js']) {
+    const source = fs.readFileSync(path.join('cypress/e2e', file), 'utf8')
+    assert.doesNotMatch(source, /Cypress\.env\(/)
+    assert.match(source, /cy\.env\(/)
+  }
+})
+
 test('concurrent command runner preserves success and failure propagation', () => {
   const resolveConcurrent = createRequire(require.resolve('concurrently'))
   const cli = resolveConcurrent.resolve(

@@ -1,8 +1,9 @@
 FROM amazonlinux:2023
 
-ENV VERSION_NODE_DEFAULT=20
+ENV VERSION_NODE_DEFAULT=22
 ENV VERSION_YARN=1.22.22
 ENV VERSION_AMPLIFY=14.2.3
+ENV VERSION_CYPRESS=16.2.1
 
 ## Install OS packages
 RUN touch ~/.bashrc
@@ -67,28 +68,22 @@ RUN dnf install -y ./google-chrome-stable_current_*.rpm
 
 ## Install Node
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
-RUN /bin/bash -c ". ~/.nvm/nvm.sh && nvm install ${VERSION_NODE_DEFAULT} && nvm use ${VERSION_NODE_DEFAULT} && chown -R root:root /root/.nvm &&  \
-	npm install -g yarn@${VERSION_YARN} && \
-	nvm alias default ${VERSION_NODE_DEFAULT} && nvm cache clear"
+RUN /bin/bash -c '. /root/.nvm/nvm.sh && \
+    nvm install "$VERSION_NODE_DEFAULT" && \
+    npm install -g "yarn@$VERSION_YARN" && \
+    nvm alias default "$VERSION_NODE_DEFAULT" && \
+    ln -s "$(dirname "$(dirname "$(command -v node)")")" /opt/node-current && \
+    nvm cache clear'
 
 # Handle yarn for any `nvm install` in the future
 RUN echo "yarn@${VERSION_YARN}" > /root/.nvm/default-packages
 
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH="/opt/node-current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 ## Install AWS Amplify CLI
-RUN /bin/bash -c ". ~/.nvm/nvm.sh && nvm use ${VERSION_NODE_DEFAULT} && \
-    npm config set user 0 && npm config set unsafe-perm true && \
-	npm install -g @aws-amplify/cli@${VERSION_AMPLIFY}"
+RUN npm install -g "@aws-amplify/cli@${VERSION_AMPLIFY}"
 
 ## Installing Cypress
-RUN /bin/bash -c ". ~/.nvm/nvm.sh && \
-    nvm use ${VERSION_NODE_DEFAULT} && \
-    npm install -g --unsafe-perm=true --allow-root cypress"
-
-## Environment Setup
-RUN echo export PATH="/root/.nvm/versions/node/${VERSION_NODE_DEFAULT}/bin:\
-$PATH" >> ~/.bashrc && \
-echo "nvm use ${VERSION_NODE_DEFAULT} 1> /dev/null" >> ~/.bashrc
+RUN npm install -g "cypress@${VERSION_CYPRESS}"
 
 ENTRYPOINT [ "bash", "-c" ]
